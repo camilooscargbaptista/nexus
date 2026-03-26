@@ -1,0 +1,29 @@
+{
+  "name": "nexus",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Autonomous Engineering Intelligence Platform — Girardelli Tecnologia",
+  "author": "Camilo Girardelli <camilo.baptista@girardellitecnologia.com>",
+  "license": "BUSL-1.1",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "npm run build --workspaces",
+    "test": "npm run test --workspaces",
+    "lint": "npm run lint --workspaces",
+    "clean": "npm run clean --workspaces"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "@jest/globals": "^30.3.0",
+    "@modelcontextprotocol/sdk": "^1.28.0",
+    "@types/jest": "^30.0.0",
+    "@types/node": "^25.5.0",
+    "jest": "^30.3.0",
+    "ts-jest": "^29.4.6",
+    "typescript": "^6.0.2"
+  }
+}
