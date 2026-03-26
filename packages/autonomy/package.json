@@ -16,9 +16,9 @@
     "test": "jest"
   },
   "dependencies": {
-    "@nexus/types": "0.1.0",
-    "@nexus/events": "0.1.0",
-    "@nexus/core": "0.1.0",
-    "@nexus/bridge": "0.1.0"
+    "@nexus/types": "*",
+    "@nexus/events": "*",
+    "@nexus/core": "*",
+    "@nexus/bridge": "*"
   }
 }

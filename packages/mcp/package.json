@@ -35,9 +35,9 @@
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.28.0",
-    "@nexus/types": "0.1.0",
-    "@nexus/events": "0.1.0",
-    "@nexus/bridge": "0.1.0"
+    "@nexus/types": "*",
+    "@nexus/events": "*",
+    "@nexus/bridge": "*"
   },
   "license": "MIT"
 }

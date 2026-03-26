@@ -16,8 +16,8 @@
     "clean": "rm -rf dist"
   },
   "dependencies": {
-    "@nexus/types": "0.1.0",
-    "@nexus/events": "0.1.0"
+    "@nexus/types": "*",
+    "@nexus/events": "*"
   },
   "peerDependencies": {
     "@girardelli/architect": ">=3.0.0",
