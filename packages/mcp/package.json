@@ -1,0 +1,43 @@
+{
+  "name": "@nexus/mcp",
+  "version": "0.1.0",
+  "description": "MCP servers exposing Nexus perception, validation, and reasoning layers",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./perception": {
+      "import": "./dist/perception-server.js",
+      "types": "./dist/perception-server.d.ts"
+    },
+    "./validation": {
+      "import": "./dist/validation-server.js",
+      "types": "./dist/validation-server.d.ts"
+    },
+    "./reasoning": {
+      "import": "./dist/reasoning-server.js",
+      "types": "./dist/reasoning-server.d.ts"
+    }
+  },
+  "bin": {
+    "nexus-perception": "./dist/bin/perception.js",
+    "nexus-validation": "./dist/bin/validation.js",
+    "nexus-reasoning": "./dist/bin/reasoning.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "jest --config jest.config.js",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.28.0",
+    "@nexus/types": "0.1.0",
+    "@nexus/events": "0.1.0",
+    "@nexus/bridge": "0.1.0"
+  },
+  "license": "MIT"
+}

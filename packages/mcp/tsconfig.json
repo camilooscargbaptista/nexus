@@ -1,0 +1,18 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "paths": {
+      "@nexus/types": ["../types/src"],
+      "@nexus/events": ["../events/src"],
+      "@nexus/bridge": ["../bridge/src"]
+    }
+  },
+  "include": ["src/**/*.ts"],
+  "references": [
+    { "path": "../types" },
+    { "path": "../events" },
+    { "path": "../bridge" }
+  ]
+}
