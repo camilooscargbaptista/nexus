@@ -1,3 +1,36 @@
+# Dependencies
 node_modules/
-*.lock
+
+# Build output
+dist/
+*.tsbuildinfo
+
+# Nexus local data
 .nexus/
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# IDE
+.vscode/settings.json
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Test coverage
+coverage/
+
+# Lock files (using npm)
+*.lock
+!package-lock.json
+
+# Turbo
+.turbo/
+
+# Next.js
+.next/
+out/
