@@ -1,0 +1,173 @@
+/**
+ * @nexus/core — Core orchestration, LLM abstraction, agents, memory, and fallback
+ *
+ * @author Camilo Girardelli — Girardelli Tecnologia
+ * @license MIT
+ */
+
+// LLM Abstraction Layer
+export type {
+  LLMProvider,
+  LLMProviderConfig,
+  LLMMessage,
+  LLMRequestOptions,
+  LLMResponse,
+  LLMStreamChunk,
+  LLMToolCall,
+  LLMToolDefinition,
+  LLMUsage,
+  EmbeddingResponse,
+  MessageRole,
+} from "./llm-provider.js";
+
+// Providers
+export { ClaudeProvider } from "./providers/claude-provider.js";
+export { MockProvider } from "./providers/mock-provider.js";
+export type { MockProviderConfig } from "./providers/mock-provider.js";
+
+// Orchestrator
+export {
+  AgentOrchestrator,
+  TaskStatus,
+  OrchestrationError,
+} from "./orchestrator.js";
+export type { Task, Agent, TaskContext } from "./orchestrator.js";
+
+// ReAct Agent
+export { ReActAgent, AgentState } from "./react-agent.js";
+export type {
+  Thought,
+  Action,
+  Observation,
+  ReActHistory,
+  ReActAgentConfig,
+} from "./react-agent.js";
+
+// Tool Gateway
+export {
+  ToolGateway,
+  ToolGatewayError,
+  ToolNotFoundError,
+  ToolValidationError,
+  ToolExecutionError,
+} from "./tool-gateway.js";
+export type {
+  ToolMetadata,
+  ToolSchema,
+  ToolFunction,
+  ToolExecutionRecord,
+} from "./tool-gateway.js";
+
+// Memory
+export {
+  ShortTermMemory,
+  LongTermMemory,
+  HybridMemory,
+  cosineSimilarity,
+} from "./memory.js";
+export type { MemoryEntry, EmbeddingEntry, MemoryStore } from "./memory.js";
+
+// Fallback
+export {
+  FallbackChain,
+  FallbackChainError,
+  RetryStrategy,
+} from "./fallback.js";
+export type { FallbackStep, FallbackExecutionRecord } from "./fallback.js";
+
+// Logger
+export { ConsoleLogger, NullLogger } from "./logger.js";
+export type { Logger } from "./logger.js";
+
+// Feedback Loop Storage
+export { FeedbackStore, InMemoryPersistence } from "./feedback-store.js";
+export type {
+  PipelineRun,
+  ScoreSnapshot,
+  FindingOutcome,
+  FixOutcome,
+  TrendQuery,
+  TrendResult,
+  FeedbackPersistence,
+} from "./feedback-store.js";
+
+// Agent Tribunal
+export { Tribunal } from "./tribunal.js";
+export type {
+  AgentRole,
+  TribunalFinding,
+  AgentVerdict,
+  TribunalVerdict,
+  ConsensusFinding,
+  DisputeFinding,
+  TribunalAgent,
+  TribunalConfig,
+} from "./tribunal.js";
+
+// Model Router
+export { ModelRouter, inferTaskProfile } from "./model-router.js";
+export type {
+  ModelTier,
+  TaskProfile,
+  TaskType,
+  RoutingRule,
+  RoutingDecision,
+  RoutingStats,
+  ModelRouterConfig,
+} from "./model-router.js";
+
+// Continuous Learning Engine
+export { LearningEngine } from "./learning-engine.js";
+export type {
+  SkillAdjustment,
+  AdjustmentType,
+  SuppressionRule,
+  PriorityBoost,
+  PatternInsight,
+  LearningReport,
+  LearningConfig,
+} from "./learning-engine.js";
+
+// Sprint 8.5 — Octopus Integration Patterns
+
+// Provider Mesh — Multi-LLM orchestration
+export { ProviderMesh } from "./provider-mesh.js";
+export type {
+  MeshProvider,
+  ProviderCapability,
+  DispatchStrategy,
+  ConsensusConfig,
+  ContextBudget,
+  ProviderRole,
+  MeshRequest,
+  ProviderResponse,
+  ConsensusResult,
+  CostRecord,
+  CostReport,
+} from "./provider-mesh.js";
+
+// Persona System — Agent personas with RBAC
+export { PersonaSystem, BUILT_IN_PERSONAS } from "./persona-system.js";
+export type {
+  Persona,
+  ToolPolicy,
+  ContextInjection,
+  PersonaMatch,
+} from "./persona-system.js";
+
+// Session State Machine — Deterministic phase management
+export { SessionStateMachine, InMemoryStateStore } from "./session-state.js";
+export type {
+  SessionPhase,
+  SessionSnapshot,
+  Decision,
+  PhaseTransition,
+  StateStore,
+} from "./session-state.js";
+export type { Observation as SessionObservation } from "./session-state.js";
+
+// Sprint 10 — Wire Everything
+export { FileStateStore, TrendTracker } from "./file-state-store.js";
+export type { FileStateStoreConfig, TrendPoint, TrendAnalysis } from "./file-state-store.js";
+export { createClaudeMeshProvider, createClaudeMeshProviders, createCustomMeshProvider, setupNexusMesh } from "./providers/claude-mesh-provider.js";
+export type { NexusMeshConfig } from "./providers/claude-mesh-provider.js";
