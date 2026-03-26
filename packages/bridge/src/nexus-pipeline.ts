@@ -41,7 +41,7 @@ export interface PipelineLogger {
 }
 
 class DefaultPipelineLogger implements PipelineLogger {
-  info(message: string, ...args: unknown[]): void { this.logger.info(message, ...args); }
+  info(message: string, ...args: unknown[]): void { console.info(message, ...args); }
   warn(message: string, ...args: unknown[]): void { console.warn(message, ...args); }
   error(message: string, ...args: unknown[]): void { console.error(message, ...args); }
   debug(message: string, ...args: unknown[]): void { console.debug(message, ...args); }
@@ -145,6 +145,31 @@ export class NexusPipeline {
       throw error;
     }
 
+    // ─── Safe defaults for disabled layers ───
+    const safePerception: ArchitectureSnapshot = perception ?? {
+      projectPath: path,
+      projectName: path.split("/").pop() ?? "unknown",
+      timestamp: new Date().toISOString(),
+      score: { overall: 0, modularity: 0, coupling: 0, cohesion: 0, layering: 0 },
+      layers: [],
+      antiPatterns: [],
+      dependencies: [],
+      frameworks: [],
+      domain: "generic" as any,
+      fileCount: 0,
+      lineCount: 0,
+    };
+
+    const safeValidation: ValidationSnapshot = validation ?? {
+      projectPath: path,
+      timestamp: new Date().toISOString(),
+      success: true,
+      overallScore: 0,
+      validators: [],
+      issueCount: { critical: 0, high: 0, medium: 0, low: 0, info: 0, total: 0 },
+      duration: 0,
+    };
+
     // ─── Generate cross-layer insights ───
     const insights = this.generateInsights(perception, reasoning, validation);
     const healthScore = this.calculateHealthScore(perception, validation);
@@ -155,13 +180,13 @@ export class NexusPipeline {
     const result: NexusPipelineResult = {
       id: pipelineId,
       projectPath: path,
-      projectName: perception?.projectName ?? path.split("/").pop() ?? "unknown",
+      projectName: safePerception.projectName,
       timestamp: new Date().toISOString(),
       duration,
-      domain: perception?.domain ?? ("generic" as any),
-      perception: perception!,
+      domain: safePerception.domain,
+      perception: safePerception,
       reasoning,
-      validation: validation!,
+      validation: safeValidation,
       insights,
       healthScore,
       trend,
@@ -322,8 +347,8 @@ export class NexusPipeline {
     validation?: ValidationSnapshot
   ): "improving" | "stable" | "degrading" {
     const health = this.calculateHealthScore(perception, validation);
-    if (health >= 75) return "stable";
-    if (health >= 50) return "stable"; // Need history to determine trend
+    if (health >= 75) return "improving";
+    if (health >= 50) return "stable";
     return "degrading";
   }
 
