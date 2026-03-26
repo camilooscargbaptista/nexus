@@ -1,0 +1,24 @@
+{
+  "name": "@nexus/autonomy",
+  "version": "1.0.0",
+  "description": "Nexus Autonomy Engine — self-healing, debt prevention, architecture evolution",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": "./dist/index.js",
+    "./remediation": "./dist/remediation.js",
+    "./debt-prevention": "./dist/debt-prevention.js",
+    "./aep": "./dist/aep-generator.js"
+  },
+  "scripts": {
+    "build": "tsc -b",
+    "test": "jest"
+  },
+  "dependencies": {
+    "@nexus/types": "0.1.0",
+    "@nexus/events": "0.1.0",
+    "@nexus/core": "0.1.0",
+    "@nexus/bridge": "0.1.0"
+  }
+}
