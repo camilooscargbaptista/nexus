@@ -1,0 +1,168 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String   @id @default(uuid())
+  email        String   @unique
+  name         String
+  passwordHash String   @map("password_hash")
+  role         Role     @default(MEMBER)
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @updatedAt @map("updated_at")
+
+  teams      TeamMember[]
+  runs       PipelineRun[]
+  auditLogs  AuditLog[]
+
+  @@map("users")
+}
+
+enum Role {
+  OWNER
+  ADMIN
+  MEMBER
+  VIEWER
+}
+
+model Team {
+  id        String   @id @default(uuid())
+  name      String
+  slug      String   @unique
+  plan      Plan     @default(FREE)
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  members  TeamMember[]
+  projects Project[]
+  auditLogs AuditLog[]
+
+  @@map("teams")
+}
+
+enum Plan {
+  FREE
+  PRO
+  ENTERPRISE
+}
+
+model TeamMember {
+  id     String   @id @default(uuid())
+  userId String   @map("user_id")
+  teamId String   @map("team_id")
+  role   Role     @default(MEMBER)
+  joinedAt DateTime @default(now()) @map("joined_at")
+
+  user User @relation(fields: [userId], references: [id])
+  team Team @relation(fields: [teamId], references: [id])
+
+  @@unique([userId, teamId])
+  @@map("team_members")
+}
+
+model Project {
+  id         String   @id @default(uuid())
+  teamId     String   @map("team_id")
+  name       String
+  repoUrl    String?  @map("repo_url")
+  defaultBranch String @default("main") @map("default_branch")
+  settings   Json     @default("{}")
+  createdAt  DateTime @default(now()) @map("created_at")
+  updatedAt  DateTime @updatedAt @map("updated_at")
+
+  team Team         @relation(fields: [teamId], references: [id])
+  runs PipelineRun[]
+
+  @@map("projects")
+}
+
+model PipelineRun {
+  id          String      @id @default(uuid())
+  projectId   String      @map("project_id")
+  triggeredBy String      @map("triggered_by")
+  status      RunStatus   @default(PENDING)
+  branch      String?
+  commitSha   String?     @map("commit_sha")
+  prNumber    Int?        @map("pr_number")
+
+  // Nexus results
+  architectureScore Float?    @map("architecture_score")
+  securityScore     Float?    @map("security_score")
+  qualityGate       GateResult? @map("quality_gate")
+  findingsCount     Int       @default(0) @map("findings_count")
+  criticalCount     Int       @default(0) @map("critical_count")
+
+  // Metadata
+  durationMs  Int?        @map("duration_ms")
+  modelTier   String?     @map("model_tier")
+  tokensUsed  Int?        @map("tokens_used")
+
+  startedAt   DateTime    @default(now()) @map("started_at")
+  completedAt DateTime?   @map("completed_at")
+
+  findings    Finding[]
+  project     Project     @relation(fields: [projectId], references: [id])
+  user        User        @relation(fields: [triggeredBy], references: [id])
+
+  @@map("pipeline_runs")
+}
+
+enum RunStatus {
+  PENDING
+  RUNNING
+  COMPLETED
+  FAILED
+  CANCELLED
+}
+
+enum GateResult {
+  PASSED
+  FAILED
+  WARNING
+}
+
+model Finding {
+  id          String   @id @default(uuid())
+  runId       String   @map("run_id")
+  layer       String   // perception, validation, reasoning, autonomy
+  category    String   // security, architecture, performance, etc.
+  severity    String   // critical, high, medium, low, info
+  title       String
+  description String
+  filePath    String?  @map("file_path")
+  line        Int?
+  confidence  Float    @default(0.8)
+  suggestion  String?
+  metadata    Json     @default("{}")
+  dismissed   Boolean  @default(false)
+
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  run PipelineRun @relation(fields: [runId], references: [id])
+
+  @@index([runId, severity])
+  @@map("findings")
+}
+
+model AuditLog {
+  id        String   @id @default(uuid())
+  userId    String   @map("user_id")
+  teamId    String?  @map("team_id")
+  action    String
+  resource  String
+  resourceId String? @map("resource_id")
+  metadata  Json     @default("{}")
+  ip        String?
+  createdAt DateTime @default(now()) @map("created_at")
+
+  user User  @relation(fields: [userId], references: [id])
+  team Team? @relation(fields: [teamId], references: [id])
+
+  @@index([teamId, createdAt])
+  @@map("audit_logs")
+}
