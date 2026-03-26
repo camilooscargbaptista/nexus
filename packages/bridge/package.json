@@ -1,0 +1,31 @@
+{
+  "name": "@nexus/bridge",
+  "version": "0.1.0",
+  "description": "Integration layer connecting Architect, CTO Toolkit, and Sentinel",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "jest --config jest.config.js",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@nexus/types": "0.1.0",
+    "@nexus/events": "0.1.0"
+  },
+  "peerDependencies": {
+    "@girardelli/architect": ">=3.0.0",
+    "sentinel-method": ">=2.0.0"
+  },
+  "peerDependenciesMeta": {
+    "@girardelli/architect": { "optional": true },
+    "sentinel-method": { "optional": true }
+  },
+  "license": "MIT"
+}
