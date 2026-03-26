@@ -1,0 +1,66 @@
+name: 🐛 Bug Report
+description: Report a bug in Nexus
+title: "[Bug]: "
+labels: ["bug", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for reporting a bug! Please fill in the details below.
+
+  - type: dropdown
+    id: package
+    attributes:
+      label: Affected Package
+      options:
+        - "@nexus/types"
+        - "@nexus/events"
+        - "@nexus/core"
+        - "@nexus/bridge"
+        - "@nexus/autonomy"
+        - "@nexus/cloud"
+        - "@nexus/dashboard"
+        - "@nexus/mcp"
+        - "@nexus/cli"
+        - "@nexus/app"
+        - "Multiple packages"
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Bug Description
+      description: A clear and concise description of the bug.
+      placeholder: What happened?
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps to Reproduce
+      description: Steps to reproduce the behavior.
+      placeholder: |
+        1. Run `nexus analyze .`
+        2. See error...
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected Behavior
+      description: What you expected to happen.
+
+  - type: input
+    id: node-version
+    attributes:
+      label: Node.js Version
+      placeholder: "18.20.0"
+
+  - type: input
+    id: os
+    attributes:
+      label: Operating System
+      placeholder: "macOS 14.2 / Ubuntu 22.04 / Windows 11"
