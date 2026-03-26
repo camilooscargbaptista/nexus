@@ -163,18 +163,16 @@ async function cmdAnalyze(projectPath: string): Promise<void> {
   const eventBus = new NexusEventBus();
 
   // Wire up progress logging
-  eventBus.subscribe("*" as any, (event) => {
-    if (typeof event === "object" && event !== null && "type" in event) {
-      const e = event as any;
-      if (e.type === "architecture.analyzed") {
-        console.log(color("  ⚡ Layer I: Perception", c.amber, c.bold), color("(Architect)", c.dim));
-      } else if (e.type === "skill.triggered") {
-        console.log(color(`     → Skill: ${e.data?.skillName}`, c.cyan));
-      } else if (e.type === "guidance.generated") {
-        console.log(color("  🧠 Layer II: Reasoning", c.blue, c.bold), color("(CTO Toolkit)", c.dim));
-      } else if (e.type === "validation.completed") {
-        console.log(color("  🛡️  Layer III: Validation", c.green, c.bold), color("(Sentinel)", c.dim));
-      }
+  eventBus.on("*" as any, (event) => {
+    const e = event as any;
+    if (e.type === "architecture.analyzed") {
+      console.log(color("  ⚡ Layer I: Perception", c.amber, c.bold), color("(Architect)", c.dim));
+    } else if (e.type === "skill.triggered") {
+      console.log(color(`     → Skill: ${e.payload?.skillName}`, c.cyan));
+    } else if (e.type === "guidance.generated") {
+      console.log(color("  🧠 Layer II: Reasoning", c.blue, c.bold), color("(CTO Toolkit)", c.dim));
+    } else if (e.type === "validation.completed") {
+      console.log(color("  🛡️  Layer III: Validation", c.green, c.bold), color("(Sentinel)", c.dim));
     }
   });
 

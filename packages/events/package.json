@@ -16,7 +16,7 @@
     "clean": "rm -rf dist"
   },
   "dependencies": {
-    "@nexus/types": "0.1.0"
+    "@nexus/types": "*"
   },
   "license": "MIT"
 }

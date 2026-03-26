@@ -11,10 +11,10 @@
     "test": "jest"
   },
   "dependencies": {
-    "@nexus/types": "0.1.0",
-    "@nexus/bridge": "0.1.0",
-    "@nexus/core": "0.1.0",
-    "@nexus/autonomy": "0.1.0",
+    "@nexus/types": "*",
+    "@nexus/bridge": "*",
+    "@nexus/core": "*",
+    "@nexus/autonomy": "*",
     "probot": "^13.0.0"
   }
 }
