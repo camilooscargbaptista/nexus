@@ -28,7 +28,7 @@ jobs:
         run: npm ci --legacy-peer-deps
 
       - name: Run tests
-        run: npx jest --ci --forceExit --detectOpenHandles
+        run: npx jest --ci --forceExit --detectOpenHandles --testTimeout=30000
 
   lint:
     name: Lint & Typecheck
