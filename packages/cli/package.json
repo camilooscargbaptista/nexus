@@ -1,0 +1,29 @@
+{
+  "name": "@nexus/cli",
+  "version": "0.1.0",
+  "description": "Nexus CLI — Autonomous Engineering Intelligence from the terminal",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "bin": {
+    "nexus": "./dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "jest --config jest.config.js",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@nexus/types": "0.1.0",
+    "@nexus/events": "0.1.0",
+    "@nexus/core": "0.1.0",
+    "@nexus/bridge": "0.1.0"
+  },
+  "peerDependencies": {
+    "@girardelli/architect": ">=3.0.0"
+  },
+  "peerDependenciesMeta": {
+    "@girardelli/architect": { "optional": true }
+  },
+  "license": "MIT"
+}
