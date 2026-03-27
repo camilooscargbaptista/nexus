@@ -171,6 +171,16 @@ export type { TemplateType, TemplateSection, TemplateConfig } from "./spec-templ
 export { SpecGenerator } from "./spec-generator.js";
 export type { SpecGeneratorConfig, GeneratedSpec } from "./spec-generator.js";
 
+// Sprint 13 — Sprint Planner
+export { EpicDecomposer } from "./epic-decomposer.js";
+export type { Epic, EpicCategory } from "./epic-decomposer.js";
+
+export { StoryGenerator } from "./story-generator.js";
+export type { UserStory, BDDScenario } from "./story-generator.js";
+
+export { SprintPlanner } from "./sprint-planner.js";
+export type { Sprint, SprintPlan, SprintPlannerConfig } from "./sprint-planner.js";
+
 // Re-export core types for convenience
 export type {
   NexusPipelineResult,

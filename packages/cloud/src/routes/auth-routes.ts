@@ -8,6 +8,11 @@ import { z } from "zod";
 import { AuthService } from "../services/auth-service.js";
 import { AuthMiddleware, AuthenticatedRequest } from "../middleware/auth.js";
 import { validate } from "../middleware/validate.js";
+import { rateLimiter } from "../middleware/rate-limiter.js";
+
+// Rate limiters para rotas de auth (anti-brute-force)
+const registerLimiter = rateLimiter({ maxRequests: 3, windowMs: 600_000, message: "Too many registration attempts, try again in 10 minutes." });
+const loginLimiter = rateLimiter({ maxRequests: 5, windowMs: 60_000, message: "Too many login attempts, try again in 1 minute." });
 
 const registerSchema = z.object({
   email: z.string().email(),
@@ -23,7 +28,7 @@ const loginSchema = z.object({
 export function createAuthRoutes(auth: AuthService, authMw: AuthMiddleware): Router {
   const router = Router();
 
-  router.post("/register", validate(registerSchema), async (req, res, next) => {
+  router.post("/register", registerLimiter, validate(registerSchema), async (req, res, next) => {
     try {
       const user = await auth.register(req.body);
       const token = authMw.generateToken({
@@ -38,7 +43,7 @@ export function createAuthRoutes(auth: AuthService, authMw: AuthMiddleware): Rou
     } catch (err) { next(err); }
   });
 
-  router.post("/login", validate(loginSchema), async (req, res, next) => {
+  router.post("/login", loginLimiter, validate(loginSchema), async (req, res, next) => {
     try {
       const user = await auth.login(req.body);
       const token = authMw.generateToken({
