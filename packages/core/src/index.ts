@@ -256,3 +256,22 @@ export type {
   ReflectionEvent,
   ReflectionEventEmitter,
 } from "./self-reflection.js";
+
+// Sprint 6 — Health Supervisor
+export { HealthSupervisor } from "./health-supervisor.js";
+export type {
+  HealthSignal,
+  HealthSnapshot,
+  HealthThresholds,
+  CodebaseMetrics,
+} from "./health-supervisor.js";
+
+export { StressDetector } from "./stress-detector.js";
+export type {
+  StressIndicator,
+  StressReport,
+  SourceAnalysis,
+} from "./stress-detector.js";
+
+export { HealthReportGenerator } from "./health-report.js";
+export type { HealthReportOptions } from "./health-report.js";
