@@ -4,7 +4,7 @@
 
 > The first AI system that **analyzes**, **reasons about**, and **auto-remediates** architectural problems in your codebase.
 
-[![Tests](https://img.shields.io/badge/tests-1148%20passing-brightgreen)]()
+[![Tests](https://img.shields.io/badge/tests-1170%20passing-brightgreen)]()
 [![Packages](https://img.shields.io/badge/packages-10-blue)]()
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.x-3178C6)]()
 [![License](https://img.shields.io/badge/license-BSL%201.1-yellow)](LICENSE)
@@ -39,7 +39,7 @@ Perception (Architect) → Reasoning (CTO Toolkit) → Validation (Sentinel Meth
 git clone https://github.com/camilooscargbaptista/nexus.git
 cd nexus && npm install
 
-# Run all 1148 tests
+# Run all 1170 tests
 npx jest
 
 # CLI (coming soon to npm)
@@ -113,7 +113,7 @@ nexus history            # Trend tracking over time
 | **`@nexus/autonomy`** | Self-improvement | AEP Generator, Debt Prevention, Remediation |
 | **`@nexus/cloud`** | Backend API | Express routes, Auth, Team/Project services, Prisma schema |
 | **`@nexus/dashboard`** | Frontend | React 18 + Tailwind + Recharts components (4 pages, 20+ components) |
-| **`@nexus/mcp`** | MCP Protocol | Perception, Reasoning, Validation servers |
+| **`@nexus/mcp`** | MCP Protocol | Perception, Reasoning, Validation servers, **MCPClient**, **MCPDiscovery** |
 | **`@nexus/cli`** | CLI tool | `nexus analyze/score/status/history` with ANSI output |
 | **`@nexus/app`** | GitHub App | PR analysis, webhook handlers |
 
@@ -175,7 +175,8 @@ const mesh = setupNexusMesh({ apiKey: process.env.ANTHROPIC_API_KEY });
 - [x] **Self-Reflection Engine** — ConstitutionEngine (quality rules), ReflectionLoop (Training-Free RL), CriticAdapter (code-specific evaluation)
 - [x] **Health Supervisor** — HealthSupervisor (8 health signals), StressDetector (15 patterns), HealthReportGenerator (Markdown reports)
 - [x] **Supervisor Agent Router** — IntentClassifier (9 categories), RoutingStrategy (hybrid BM25+intent), SupervisorRouter (LLM-powered)
-- [x] **1148 tests passing across all packages**
+- [x] **MCP Client Gateway** — MCPClient (JSON-RPC 2.0), MCPDiscovery (multi-server), MCPToolBridge (MCP→Nexus skills)
+- [x] **1170 tests passing across all packages**
 
 ### Next Up
 
@@ -197,7 +198,7 @@ const mesh = setupNexusMesh({ apiKey: process.env.ANTHROPIC_API_KEY });
 
 **AI:** Anthropic Claude API (Haiku/Sonnet/Opus) · Multi-model routing
 
-**Testing:** Jest · ts-jest · 1148 tests
+**Testing:** Jest · ts-jest · 1170 tests
 
 **Infra:** Docker · AWS · GitHub Actions
 
