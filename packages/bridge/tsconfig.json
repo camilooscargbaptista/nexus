@@ -1,16 +1,23 @@
 {
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
+    "composite": true,
+    "declaration": true,
     "outDir": "./dist",
     "rootDir": "./src",
+    "types": ["node"],
     "paths": {
       "@nexus/types": ["../types/src"],
-      "@nexus/events": ["../events/src"]
+      "@nexus/events": ["../events/src"],
+      "@nexus/core": ["../core/src"]
     }
   },
   "include": ["src/**/*.ts"],
+  "exclude": ["src/__tests__/**"],
   "references": [
     { "path": "../types" },
-    { "path": "../events" }
+    { "path": "../events" },
+    { "path": "../core" }
   ]
 }
+
