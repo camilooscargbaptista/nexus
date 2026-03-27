@@ -28,3 +28,15 @@ export type {
 
 export { createReasoningServer } from "./reasoning-server.js";
 export type { ReasoningBackend, SkillRouteResult } from "./reasoning-server.js";
+
+// Sprint 8 — MCP Client Gateway
+export { MCPClient } from "./mcp-client.js";
+export type {
+  MCPTool,
+  MCPCallResult,
+  MCPServerConfig,
+  MCPClientConfig,
+} from "./mcp-client.js";
+
+export { MCPDiscovery } from "./mcp-discovery.js";
+export type { DiscoveredServer, DiscoveryConfig } from "./mcp-discovery.js";

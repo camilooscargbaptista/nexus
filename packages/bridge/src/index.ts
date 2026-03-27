@@ -138,6 +138,10 @@ export type { ActivationPlan as RoutingActivationPlan } from "./routing-strategy
 export { SupervisorRouter } from "./supervisor-router.js";
 export type { SupervisorConfig, SupervisorDecision } from "./supervisor-router.js";
 
+// Sprint 8 — MCP Tool Bridge
+export { MCPToolBridge } from "./mcp-tool-bridge.js";
+export type { MCPToolInfo, BridgedSkill, BridgeConfig } from "./mcp-tool-bridge.js";
+
 // Re-export core types for convenience
 export type {
   NexusPipelineResult,
