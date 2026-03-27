@@ -293,3 +293,23 @@ export type {
 
 export { RewardReportGenerator } from "./reward-report.js";
 export type { RewardReportOptions } from "./reward-report.js";
+
+// Sprint 10 — Context Window Manager
+export { TokenEstimator } from "./token-estimator.js";
+export type {
+  TokenEstimate,
+  ModelLimits,
+} from "./token-estimator.js";
+
+export { ContextPrioritizer } from "./context-prioritizer.js";
+export type {
+  ContextChunk,
+  ContextWindow,
+  ContextPrioritizerConfig,
+} from "./context-prioritizer.js";
+
+export { ContextWindowManager } from "./context-window.js";
+export type {
+  ContextManagerConfig,
+  AssembledPrompt,
+} from "./context-window.js";
