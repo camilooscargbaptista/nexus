@@ -192,6 +192,7 @@ export class Tribunal {
    * Find consensus — findings raised by multiple agents on the same topic
    */
   private findConsensus(verdicts: AgentVerdict[]): ConsensusFinding[] {
+    // Phase 1: Group by exact key
     const consensusMap = new Map<string, { finding: TribunalFinding; agents: Set<AgentRole> }>();
 
     for (const verdict of verdicts) {
@@ -209,8 +210,26 @@ export class Tribunal {
       }
     }
 
+    // Phase 2: Merge entries with high semantic similarity (>= 0.6)
+    const entries = [...consensusMap.values()];
+    for (let i = 0; i < entries.length; i++) {
+      for (let j = i + 1; j < entries.length; j++) {
+        const a = entries[i]!;
+        const b = entries[j]!;
+        const similarity = this.findingSimilarity(a.finding, b.finding);
+        if (similarity >= 0.6) {
+          // Merge b into a
+          for (const agent of b.agents) {
+            a.agents.add(agent);
+          }
+          entries.splice(j, 1);
+          j--;
+        }
+      }
+    }
+
     const result: ConsensusFinding[] = [];
-    for (const { finding, agents } of consensusMap.values()) {
+    for (const { finding, agents } of entries) {
       if (agents.size >= this.config.consensusThreshold) {
         result.push({
           finding,
@@ -260,12 +279,54 @@ export class Tribunal {
   }
 
   /**
-   * Create a normalized key for matching findings across agents
+   * Create a normalized key for matching findings across agents.
+   * Uses semantic similarity: category + severity + file overlap + title terms.
    */
   private findingKey(finding: TribunalFinding): string {
-    // Match by category + severity + overlapping affected files
     const files = finding.affectedFiles.sort().join(",");
-    return `${finding.category}:${finding.severity}:${files}`.toLowerCase();
+    const titleTerms = this.extractTerms(finding.title);
+    const descTerms = this.extractTerms(finding.description).slice(0, 5);
+    const terms = [...titleTerms, ...descTerms].join("|");
+    return `${finding.category}:${finding.severity}:${files}:${terms}`.toLowerCase();
+  }
+
+  /**
+   * Check semantic similarity between two findings using term overlap (cosine-like).
+   * Used to improve consensus detection beyond exact key matching.
+   */
+  private findingSimilarity(a: TribunalFinding, b: TribunalFinding): number {
+    if (a.category !== b.category) return 0;
+
+    // Severity match (40% weight)
+    const severityScore = a.severity === b.severity ? 0.4 : 0.1;
+
+    // File overlap (30% weight) — Jaccard similarity
+    const filesA = new Set(a.affectedFiles);
+    const filesB = new Set(b.affectedFiles);
+    const fileIntersection = [...filesA].filter((f) => filesB.has(f)).length;
+    const fileUnion = new Set([...filesA, ...filesB]).size;
+    const fileScore = fileUnion > 0 ? (fileIntersection / fileUnion) * 0.3 : 0.15;
+
+    // Term overlap (30% weight) — cosine-inspired
+    const termsA = new Set(this.extractTerms(a.title + " " + a.description));
+    const termsB = new Set(this.extractTerms(b.title + " " + b.description));
+    const termIntersection = [...termsA].filter((t) => termsB.has(t)).length;
+    const termUnion = new Set([...termsA, ...termsB]).size;
+    const termScore = termUnion > 0 ? (termIntersection / termUnion) * 0.3 : 0;
+
+    return severityScore + fileScore + termScore;
+  }
+
+  /**
+   * Extract meaningful terms from text (stopword-free).
+   */
+  private extractTerms(text: string): string[] {
+    const stopwords = new Set(["the", "a", "an", "is", "are", "was", "were", "in", "on", "at", "to", "for", "of", "and", "or", "not", "with", "by", "from", "as", "this", "that", "it", "be"]);
+    return text
+      .toLowerCase()
+      .replace(/[^a-z0-9\s]/g, "")
+      .split(/\s+/)
+      .filter((w) => w.length > 2 && !stopwords.has(w));
   }
 
   /**

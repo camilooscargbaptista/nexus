@@ -278,7 +278,7 @@ export class NexusPipeline {
     }
 
     // Insight: Domain-specific risk assessment
-    if (perception.domain !== ("generic" as any)) {
+    if (perception.domain !== "generic") {
       const domainRiskMap: Record<string, string[]> = {
         fintech: ["security", "compliance", "testing"],
         healthtech: ["security", "compliance", "testing"],
