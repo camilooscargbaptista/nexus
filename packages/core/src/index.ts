@@ -275,3 +275,21 @@ export type {
 
 export { HealthReportGenerator } from "./health-report.js";
 export type { HealthReportOptions } from "./health-report.js";
+
+// Sprint 9 — Reward Tracker
+export { RewardTracker } from "./reward-tracker.js";
+export type {
+  RewardEntry,
+  RewardSummary,
+  RewardTrackerConfig,
+} from "./reward-tracker.js";
+
+export { FeedbackCollector } from "./feedback-collector.js";
+export type {
+  FeedbackSource,
+  FeedbackEvent,
+  FeedbackCollectorConfig,
+} from "./feedback-collector.js";
+
+export { RewardReportGenerator } from "./reward-report.js";
+export type { RewardReportOptions } from "./reward-report.js";
