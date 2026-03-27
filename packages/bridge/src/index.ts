@@ -115,6 +115,10 @@ export type { BM25Config, SearchResult, SkillSearchResult } from "./bm25-search.
 export { LLMRecommender } from "./llm-recommender.js";
 export type { LLMProvider, SkillRecommendation, RecommenderConfig } from "./llm-recommender.js";
 
+// Sprint 5 — Self-Reflection
+export { CriticAdapter } from "./critic-adapter.js";
+export type { CriticConfig, CriticVerdict } from "./critic-adapter.js";
+
 // Re-export core types for convenience
 export type {
   NexusPipelineResult,

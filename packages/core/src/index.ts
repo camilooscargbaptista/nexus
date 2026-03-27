@@ -237,3 +237,22 @@ export type {
   ExecutionPlan,
   PlannerContext,
 } from "./query-planner.js";
+
+// Sprint 5 — Self-Reflection
+export { ConstitutionEngine } from "./constitution.js";
+export type {
+  ConstitutionRule,
+  ConstitutionCategory,
+  ConstitutionEvaluation,
+  EvaluationContext,
+  RuleResult,
+} from "./constitution.js";
+
+export { ReflectionLoop } from "./self-reflection.js";
+export type {
+  ContentGenerator,
+  ReflectionConfig,
+  ReflectionResult,
+  ReflectionEvent,
+  ReflectionEventEmitter,
+} from "./self-reflection.js";
