@@ -142,6 +142,25 @@ export type { SupervisorConfig, SupervisorDecision } from "./supervisor-router.j
 export { MCPToolBridge } from "./mcp-tool-bridge.js";
 export type { MCPToolInfo, BridgedSkill, BridgeConfig } from "./mcp-tool-bridge.js";
 
+// Sprint 11 — Autonomous Pipeline
+export { ExecutionPlan } from "./execution-plan.js";
+export type {
+  ExecutionStep,
+  StepStatus,
+  ExecutionPlanConfig,
+} from "./execution-plan.js";
+
+export { PipelineOrchestrator } from "./pipeline-orchestrator.js";
+export type {
+  PipelineResult,
+  StepHandler,
+  PipelineContext,
+  PipelineOrchestratorConfig,
+} from "./pipeline-orchestrator.js";
+
+export { PipelineReportGenerator } from "./pipeline-report.js";
+export type { PipelineReportOptions } from "./pipeline-report.js";
+
 // Re-export core types for convenience
 export type {
   NexusPipelineResult,
