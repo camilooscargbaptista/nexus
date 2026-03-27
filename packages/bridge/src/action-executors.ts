@@ -32,15 +32,15 @@ export class ConsoleExecutor implements ActionExecutor {
       case "critical":
         console.error(message);
         break;
-      case "warning":
+      case "medium":
         console.warn(message);
         break;
       default:
         console.log(message);
     }
 
-    if (event.data) {
-      console.log(`${this.prefix}   Data: ${JSON.stringify(event.data).substring(0, 200)}`);
+    if (event.metadata) {
+      console.log(`${this.prefix}   Data: ${JSON.stringify(event.metadata).substring(0, 200)}`);
     }
 
     return `Logged to console: ${action} for ${event.type}`;
@@ -101,7 +101,7 @@ export class FileReporterExecutor implements ActionExecutor {
         type: event.type,
         source: event.source,
         severity: event.severity,
-        data: event.data,
+        data: event.metadata,
       },
       result: `Executed ${action} for ${event.type}`,
     };
@@ -177,7 +177,7 @@ export class WebhookExecutor implements ActionExecutor {
         source: event.source,
         severity: event.severity,
         timestamp: event.timestamp,
-        data: event.data,
+        data: event.metadata,
       },
       nexus: {
         version: "0.1.0",
@@ -240,7 +240,7 @@ export class CompositeExecutor implements ActionExecutor {
 
     for (const executor of this.executors) {
       try {
-        const result = await executor.execute(action, event);
+        const result = await executor.execute(action, event, {});
         results.push(result);
       } catch (err) {
         results.push(`Error: ${err instanceof Error ? err.message : String(err)}`);

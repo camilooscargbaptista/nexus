@@ -2,6 +2,7 @@
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
     "target": "ES2022",
+    "module": "ESNext",
     "jsx": "preserve",
     "moduleResolution": "bundler",
     "baseUrl": ".",
@@ -15,7 +16,8 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
-    "isolatedModules": true
+    "isolatedModules": true,
+    "rootDir": "."
   },
   "include": [
     "src/**/*",
