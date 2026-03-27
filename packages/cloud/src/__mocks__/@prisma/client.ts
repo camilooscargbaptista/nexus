@@ -41,6 +41,10 @@ const mockInstance = {
   auditLog: {
     create: jest.fn(),
   },
+  finding: {
+    createMany: jest.fn(),
+    findMany: jest.fn(),
+  },
   $queryRaw: jest.fn(),
   $connect: jest.fn(),
   $disconnect: jest.fn(),
@@ -60,6 +64,7 @@ export class PrismaClient {
   project!: MockInstance["project"];
   pipelineRun!: MockInstance["pipelineRun"];
   auditLog!: MockInstance["auditLog"];
+  finding!: MockInstance["finding"];
   $queryRaw!: MockInstance["$queryRaw"];
   $connect!: MockInstance["$connect"];
   $disconnect!: MockInstance["$disconnect"];

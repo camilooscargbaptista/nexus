@@ -24,8 +24,8 @@ import { createAuthRoutes } from "./routes/auth-routes.js";
 import { createProjectRoutes } from "./routes/project-routes.js";
 import { createTeamRoutes } from "./routes/team-routes.js";
 import { createHealthRoutes, HealthCheck } from "./routes/health-routes.js";
+import { createPipelineRoutes, FindingRepository, PipelineEngine } from "./routes/pipeline-routes.js";
 
-/** All repositories needed to bootstrap the app */
 export interface Repositories {
   users: UserRepository;
   projects: ProjectRepository;
@@ -34,6 +34,12 @@ export interface Repositories {
   members: MemberRepository;
   audit: AuditStore;
   health: HealthCheck;
+  findings: FindingRepository;
+}
+
+/** Pipeline engine — optional, enables /analyze endpoint */
+export interface AppDeps {
+  pipeline?: PipelineEngine;
 }
 
 /** Assembled services — exposed for testing */
@@ -54,7 +60,7 @@ export interface AppContext {
  * This is the composition root — the only place where concrete
  * implementations are connected to interfaces.
  */
-export function createApp(config: AppConfig, repos: Repositories): AppContext {
+export function createApp(config: AppConfig, repos: Repositories, deps?: AppDeps): AppContext {
   const app = express();
 
   // --- Global middleware ---
@@ -81,6 +87,16 @@ export function createApp(config: AppConfig, repos: Repositories): AppContext {
   app.use("/api/auth", createAuthRoutes(authService, authMw));
   app.use("/api/projects", auditMw.log("project.access", "project"), createProjectRoutes(projectService, authMw));
   app.use("/api/teams", auditMw.log("team.access", "team"), createTeamRoutes(teamService, authMw));
+
+  // Pipeline routes (optional — enabled when pipeline engine is provided)
+  if (deps?.pipeline) {
+    app.use("/api", createPipelineRoutes({
+      pipeline: deps.pipeline,
+      findings: repos.findings,
+      runs: repos.runs,
+      authMw,
+    }));
+  }
 
   // --- API info ---
   app.get("/api", (_req, res) => {
