@@ -161,6 +161,16 @@ export type {
 export { PipelineReportGenerator } from "./pipeline-report.js";
 export type { PipelineReportOptions } from "./pipeline-report.js";
 
+// Sprint 12 — Spec Generator
+export { SpecParser } from "./spec-parser.js";
+export type { ParsedSpec, ParsedFeature } from "./spec-parser.js";
+
+export { SpecTemplate } from "./spec-template.js";
+export type { TemplateType, TemplateSection, TemplateConfig } from "./spec-template.js";
+
+export { SpecGenerator } from "./spec-generator.js";
+export type { SpecGeneratorConfig, GeneratedSpec } from "./spec-generator.js";
+
 // Re-export core types for convenience
 export type {
   NexusPipelineResult,
