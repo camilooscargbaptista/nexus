@@ -4,7 +4,7 @@
 
 > The first AI system that **analyzes**, **reasons about**, and **auto-remediates** architectural problems in your codebase.
 
-[![Tests](https://img.shields.io/badge/tests-1086%20passing-brightgreen)]()
+[![Tests](https://img.shields.io/badge/tests-1110%20passing-brightgreen)]()
 [![Packages](https://img.shields.io/badge/packages-10-blue)]()
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.x-3178C6)]()
 [![License](https://img.shields.io/badge/license-BSL%201.1-yellow)](LICENSE)
@@ -39,7 +39,7 @@ Perception (Architect) → Reasoning (CTO Toolkit) → Validation (Sentinel Meth
 git clone https://github.com/camilooscargbaptista/nexus.git
 cd nexus && npm install
 
-# Run all 1086 tests
+# Run all 1110 tests
 npx jest
 
 # CLI (coming soon to npm)
@@ -108,8 +108,8 @@ nexus history            # Trend tracking over time
 |---------|-------------|-------------|
 | **`@nexus/types`** | Shared type system | LLMProvider, NexusEvent, SystemEvent, Pipeline types |
 | **`@nexus/events`** | Event bus | NexusEventBus, **MiddlewareChain**, withLogging, withTiming |
-| **`@nexus/core`** | Engine | Orchestrator, ProviderMesh, ModelRouter, PersonaSystem, ToolGateway, SessionState, Tribunal, **ResilientHttpClient**, **TTLCache**, **RateLimiter**, **BatchExecutor**, **QueryPlanner**, **BR Validators** (CPF/CNPJ/CEP), **Markdown Formatting** |
-| **`@nexus/bridge`** | Integration layer | ArchitectAdapter, SentinelAdapter, ToolkitRouter, ReactionEngine, NexusPipeline, IntentRouter, DriftDetector, **SkillMeta** (Zod), **AutoRegistry**, **BM25Index**, **SkillSearchEngine**, **LLMRecommender** |
+| **`@nexus/core`** | Engine | Orchestrator, ProviderMesh, ModelRouter, PersonaSystem, ToolGateway, SessionState, Tribunal, **ResilientHttpClient**, **TTLCache**, **RateLimiter**, **BatchExecutor**, **QueryPlanner**, **BR Validators** (CPF/CNPJ/CEP), **Markdown Formatting**, **ConstitutionEngine**, **ReflectionLoop** |
+| **`@nexus/bridge`** | Integration layer | ArchitectAdapter, SentinelAdapter, ToolkitRouter, ReactionEngine, NexusPipeline, IntentRouter, DriftDetector, **SkillMeta** (Zod), **AutoRegistry**, **BM25Index**, **SkillSearchEngine**, **LLMRecommender**, **CriticAdapter** |
 | **`@nexus/autonomy`** | Self-improvement | AEP Generator, Debt Prevention, Remediation |
 | **`@nexus/cloud`** | Backend API | Express routes, Auth, Team/Project services, Prisma schema |
 | **`@nexus/dashboard`** | Frontend | React 18 + Tailwind + Recharts components (4 pages, 20+ components) |
@@ -172,7 +172,8 @@ const mesh = setupNexusMesh({ apiKey: process.env.ANTHROPIC_API_KEY });
 - [x] **Governance + Discovery** — SkillMeta (Zod validation), AutoRegistry (convention-based), Middleware Logging (correlation IDs)
 - [x] **Intelligence Layer** — BM25 Search (zero-dep), LLMRecommender (BM25→LLM fallback), BatchExecutor (parallel DAG)
 - [x] **Domain-Specific** — BR Validators 🇧🇷 (CPF/CNPJ/CEP), Markdown Formatting, QueryPlanner (objective decomposition)
-- [x] **1086 tests passing across all packages**
+- [x] **Self-Reflection Engine** — ConstitutionEngine (quality rules), ReflectionLoop (Training-Free RL), CriticAdapter (code-specific evaluation)
+- [x] **1110 tests passing across all packages**
 
 ### Next Up
 
@@ -194,7 +195,7 @@ const mesh = setupNexusMesh({ apiKey: process.env.ANTHROPIC_API_KEY });
 
 **AI:** Anthropic Claude API (Haiku/Sonnet/Opus) · Multi-model routing
 
-**Testing:** Jest · ts-jest · 1086 tests
+**Testing:** Jest · ts-jest · 1110 tests
 
 **Infra:** Docker · AWS · GitHub Actions
 
