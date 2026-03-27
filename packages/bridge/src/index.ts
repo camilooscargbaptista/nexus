@@ -103,6 +103,18 @@ export type { RawArchitectReport, RawArchitectModule, BridgedAnalysisReport } fr
 export { ConsoleExecutor, FileReporterExecutor, WebhookExecutor, CompositeExecutor, createExecutor } from "./action-executors.js";
 export type { FileReporterConfig, WebhookConfig, ExecutorFactoryConfig } from "./action-executors.js";
 
+// Sprint 2 — Governance + Discovery
+export { SkillMetaSchema, SkillMetaBuilder, validateSkillMeta, parseSkillMeta } from "./skill-meta.js";
+export type { SkillMeta, SkillMetaValidationResult, SkillMetaValidationError } from "./skill-meta.js";
+export { AutoRegistry } from "./auto-registry.js";
+export type { FeatureModule, DiscoveryResult } from "./auto-registry.js";
+
+// Sprint 3 — Intelligence Layer
+export { BM25Index, SkillSearchEngine, tokenize } from "./bm25-search.js";
+export type { BM25Config, SearchResult, SkillSearchResult } from "./bm25-search.js";
+export { LLMRecommender } from "./llm-recommender.js";
+export type { LLMProvider, SkillRecommendation, RecommenderConfig } from "./llm-recommender.js";
+
 // Re-export core types for convenience
 export type {
   NexusPipelineResult,
@@ -112,3 +124,4 @@ export type {
   GuidanceResult,
   ValidationSnapshot,
 } from "@nexus/types";
+
