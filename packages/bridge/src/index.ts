@@ -119,6 +119,25 @@ export type { LLMProvider, SkillRecommendation, RecommenderConfig } from "./llm-
 export { CriticAdapter } from "./critic-adapter.js";
 export type { CriticConfig, CriticVerdict } from "./critic-adapter.js";
 
+// Sprint 7 — Supervisor Agent Router
+export { IntentClassifier } from "./intent-classifier.js";
+export type {
+  IntentCategory,
+  ClassificationResult,
+  ClassifierConfig,
+} from "./intent-classifier.js";
+
+export { RoutingStrategy } from "./routing-strategy.js";
+export type {
+  SkillCandidate,
+  RoutingStrategyConfig,
+  IntentSkillMap,
+} from "./routing-strategy.js";
+export type { ActivationPlan as RoutingActivationPlan } from "./routing-strategy.js";
+
+export { SupervisorRouter } from "./supervisor-router.js";
+export type { SupervisorConfig, SupervisorDecision } from "./supervisor-router.js";
+
 // Re-export core types for convenience
 export type {
   NexusPipelineResult,
