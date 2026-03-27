@@ -10,6 +10,7 @@ export default {
     "^@nexus/core$": "<rootDir>/packages/core/src/index.ts",
     "^@nexus/bridge$": "<rootDir>/packages/bridge/src/index.ts",
     "^@nexus/autonomy$": "<rootDir>/packages/autonomy/src/index.ts",
+    "^@prisma/client$": "<rootDir>/packages/cloud/src/__mocks__/@prisma/client.ts",
     "^(\\.{1,2}/.*)\\.js$": "$1",
   },
   transform: {
@@ -31,6 +32,7 @@ export default {
             "@nexus/core": ["./packages/core/src"],
             "@nexus/bridge": ["./packages/bridge/src"],
             "@nexus/autonomy": ["./packages/autonomy/src"],
+            "@prisma/client": ["./packages/cloud/src/__mocks__/@prisma/client.ts"],
           },
         },
       },

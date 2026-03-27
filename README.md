@@ -4,7 +4,7 @@
 
 > The first AI system that **analyzes**, **reasons about**, and **auto-remediates** architectural problems in your codebase.
 
-[![Tests](https://img.shields.io/badge/tests-1269%20passing-brightgreen)]()
+[![Tests](https://img.shields.io/badge/tests-1299%20passing-brightgreen)]()
 [![Packages](https://img.shields.io/badge/packages-10-blue)]()
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.x-3178C6)]()
 [![License](https://img.shields.io/badge/license-BSL%201.1-yellow)](LICENSE)
@@ -39,7 +39,7 @@ Perception (Architect) → Reasoning (CTO Toolkit) → Validation (Sentinel Meth
 git clone https://github.com/camilooscargbaptista/nexus.git
 cd nexus && npm install
 
-# Run all 1269 tests
+# Run all 1299 tests
 npx jest
 
 # CLI (coming soon to npm)
@@ -109,9 +109,9 @@ nexus history            # Trend tracking over time
 | **`@nexus/types`** | Shared type system | LLMProvider, NexusEvent, SystemEvent, Pipeline types |
 | **`@nexus/events`** | Event bus | NexusEventBus, **MiddlewareChain**, withLogging, withTiming |
 | **`@nexus/core`** | Engine | Orchestrator, ProviderMesh, ModelRouter, PersonaSystem, ToolGateway, SessionState, Tribunal, **ResilientHttpClient**, **TTLCache**, **RateLimiter**, **BatchExecutor**, **QueryPlanner**, **BR Validators** (CPF/CNPJ/CEP), **Markdown Formatting**, **ConstitutionEngine**, **ReflectionLoop**, **HealthSupervisor**, **StressDetector**, **HealthReportGenerator**, **RewardTracker**, **FeedbackCollector**, **RewardReportGenerator**, **TokenEstimator**, **ContextPrioritizer**, **ContextWindowManager** |
-| **`@nexus/bridge`** | Integration layer | ArchitectAdapter, SentinelAdapter, ToolkitRouter, ReactionEngine, NexusPipeline, IntentRouter, DriftDetector, **SkillMeta** (Zod), **AutoRegistry**, **BM25Index**, **SkillSearchEngine**, **LLMRecommender**, **CriticAdapter**, **IntentClassifier**, **RoutingStrategy**, **SupervisorRouter**, **MCPToolBridge**, **ExecutionPlan**, **PipelineOrchestrator**, **PipelineReportGenerator**, **SpecParser**, **SpecTemplate**, **SpecGenerator**, **EpicDecomposer**, **StoryGenerator**, **SprintPlanner** |
+| **`@nexus/bridge`** | Integration layer | ArchitectAdapter, SentinelAdapter, ToolkitRouter, ReactionEngine, NexusPipeline, IntentRouter, DriftDetector, **SkillMeta** (Zod), **AutoRegistry**, **BM25Index**, **SkillSearchEngine**, **LLMRecommender**, **CriticAdapter**, **IntentClassifier**, **RoutingStrategy**, **SupervisorRouter**, **MCPToolBridge**, **ExecutionPlan**, **PipelineOrchestrator**, **PipelineReportGenerator**, **SpecParser**, **SpecTemplate**, **SpecGenerator**, **EpicDecomposer**, **StoryGenerator**, **SprintPlanner**, **C4Generator**, **DataModelGenerator**, **ArchitectureGenerator** |
 | **`@nexus/autonomy`** | Self-improvement | AEP Generator, Debt Prevention, Remediation |
-| **`@nexus/cloud`** | Backend API | Express routes, Auth, Team/Project services, Prisma schema |
+| **`@nexus/cloud`** | Backend API | Express routes, Auth, Team/Project services, **Prisma schema + repositories (PostgreSQL)**, **rate limiting** |
 | **`@nexus/dashboard`** | Frontend | React 18 + Tailwind + Recharts components (4 pages, 20+ components) |
 | **`@nexus/mcp`** | MCP Protocol | Perception, Reasoning, Validation servers, **MCPClient**, **MCPDiscovery** |
 | **`@nexus/cli`** | CLI tool | `nexus analyze/score/status/history` with ANSI output |
@@ -182,7 +182,9 @@ const mesh = setupNexusMesh({ apiKey: process.env.ANTHROPIC_API_KEY });
 - [x] **Spec Generator** — SpecParser (semantic extraction), SpecTemplate (10-section C4), SpecGenerator (text→spec)
 - [x] **Sprint Planner** — EpicDecomposer (9-category), StoryGenerator (BDD), SprintPlanner (velocity-based)
 - [x] **Quality Fixes** — Tribunal consensus (semantic similarity), cloud rate limiting, pipeline string bug
-- [x] **1269 tests passing across all packages**
+- [x] **Architecture Generator** — C4Generator (3-level Mermaid), DataModelGenerator (Prisma+SQL+OpenAPI), ArchitectureGenerator
+- [x] **Prisma Connect** — 7 Prisma repos (PostgreSQL), auto-detect connection, graceful shutdown, in-memory fallback
+- [x] **1299 tests passing across all packages**
 
 ### Next Up
 
@@ -204,7 +206,7 @@ const mesh = setupNexusMesh({ apiKey: process.env.ANTHROPIC_API_KEY });
 
 **AI:** Anthropic Claude API (Haiku/Sonnet/Opus) · Multi-model routing
 
-**Testing:** Jest · ts-jest · 1269 tests
+**Testing:** Jest · ts-jest · 1299 tests
 
 **Infra:** Docker · AWS · GitHub Actions
 
