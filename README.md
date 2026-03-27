@@ -4,7 +4,7 @@
 
 > The first AI system that **analyzes**, **reasons about**, and **auto-remediates** architectural problems in your codebase.
 
-[![Tests](https://img.shields.io/badge/tests-1299%20passing-brightgreen)]()
+[![Tests](https://img.shields.io/badge/tests-1308%20passing-brightgreen)]()
 [![Packages](https://img.shields.io/badge/packages-10-blue)]()
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.x-3178C6)]()
 [![License](https://img.shields.io/badge/license-BSL%201.1-yellow)](LICENSE)
@@ -39,7 +39,7 @@ Perception (Architect) → Reasoning (CTO Toolkit) → Validation (Sentinel Meth
 git clone https://github.com/camilooscargbaptista/nexus.git
 cd nexus && npm install
 
-# Run all 1299 tests
+# Run all 1308 tests
 npx jest
 
 # CLI (coming soon to npm)
@@ -184,7 +184,7 @@ const mesh = setupNexusMesh({ apiKey: process.env.ANTHROPIC_API_KEY });
 - [x] **Quality Fixes** — Tribunal consensus (semantic similarity), cloud rate limiting, pipeline string bug
 - [x] **Architecture Generator** — C4Generator (3-level Mermaid), DataModelGenerator (Prisma+SQL+OpenAPI), ArchitectureGenerator
 - [x] **Prisma Connect** — 7 Prisma repos (PostgreSQL), auto-detect connection, graceful shutdown, in-memory fallback
-- [x] **1299 tests passing across all packages**
+- [x] **1308 tests passing across all packages**
 
 ### Next Up
 
@@ -206,7 +206,7 @@ const mesh = setupNexusMesh({ apiKey: process.env.ANTHROPIC_API_KEY });
 
 **AI:** Anthropic Claude API (Haiku/Sonnet/Opus) · Multi-model routing
 
-**Testing:** Jest · ts-jest · 1299 tests
+**Testing:** Jest · ts-jest · 1308 tests
 
 **Infra:** Docker · AWS · GitHub Actions
 

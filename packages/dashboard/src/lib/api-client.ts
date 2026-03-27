@@ -92,6 +92,22 @@ export class NexusApiClient {
     return this.request<Project>("POST", `/teams/${teamId}/projects`, data);
   }
 
+  /**
+   * Trigger a pipeline analysis for a project
+   */
+  async triggerAnalysis(projectId: string, opts?: { branch?: string; projectPath?: string }): Promise<ApiResult<{
+    runId: string;
+    pipelineId: string;
+    overallScore: number;
+    scores: { perception: number; reasoning: number; validation: number };
+    qualityGate: string;
+    findingsCount: number;
+    criticalCount: number;
+    durationMs: number;
+  }>> {
+    return this.request("POST", `/projects/${projectId}/analyze`, opts ?? {});
+  }
+
   // ==================== Run Methods ====================
 
   /**

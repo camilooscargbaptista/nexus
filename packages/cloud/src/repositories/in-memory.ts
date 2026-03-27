@@ -13,6 +13,7 @@ import { TeamRepository, TeamRecord, CreateTeamData, MemberRepository, MemberRec
 import { AuditStore, AuditEntry } from "../middleware/audit.js";
 import { HealthCheck } from "../routes/health-routes.js";
 import { Repositories } from "../app.js";
+import { InMemoryFindingRepository } from "../routes/pipeline-routes.js";
 
 function uuid(): string {
   return crypto.randomUUID();
@@ -220,5 +221,6 @@ export function createInMemoryRepositories(): Repositories {
     members: new InMemoryMemberRepository(),
     audit: new InMemoryAuditStore(),
     health: new InMemoryHealthCheck(),
+    findings: new InMemoryFindingRepository(),
   };
 }

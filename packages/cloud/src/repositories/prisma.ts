@@ -14,6 +14,7 @@ import { TeamRepository, TeamRecord, CreateTeamData, MemberRepository, MemberRec
 import { AuditStore, AuditEntry } from "../middleware/audit.js";
 import { HealthCheck } from "../routes/health-routes.js";
 import { Repositories } from "../app.js";
+import { FindingRepository, FindingRecord, CategoryCount } from "../routes/pipeline-routes.js";
 
 // ═══════════════════════════════════════════════════════════════
 // USER REPOSITORY
@@ -377,6 +378,99 @@ class PrismaHealthCheck implements HealthCheck {
 }
 
 // ═══════════════════════════════════════════════════════════════
+// FINDING REPOSITORY
+// ═══════════════════════════════════════════════════════════════
+
+class PrismaFindingRepository implements FindingRepository {
+  constructor(private readonly prisma: PrismaClient) {}
+
+  async createMany(findings: Omit<FindingRecord, "id" | "createdAt">[]): Promise<number> {
+    const result = await this.prisma.finding.createMany({
+      data: findings.map((f: any) => ({
+        runId: f.runId,
+        layer: f.layer,
+        category: f.category,
+        severity: f.severity,
+        title: f.title,
+        description: f.description,
+        filePath: f.filePath,
+        line: f.line,
+        confidence: f.confidence,
+        suggestion: f.suggestion,
+        metadata: f.metadata ?? {},
+        dismissed: f.dismissed ?? false,
+      })),
+    });
+    return result.count;
+  }
+
+  async findByRun(runId: string): Promise<FindingRecord[]> {
+    const findings = await this.prisma.finding.findMany({
+      where: { runId },
+      orderBy: { createdAt: "desc" },
+    });
+    return findings.map(this.toRecord);
+  }
+
+  async findByProject(projectId: string, opts?: { days?: number }): Promise<FindingRecord[]> {
+    const since = opts?.days ? new Date(Date.now() - opts.days * 86400000) : undefined;
+    const findings = await this.prisma.finding.findMany({
+      where: {
+        run: {
+          projectId,
+          ...(since && { startedAt: { gte: since } }),
+        },
+      },
+      orderBy: { createdAt: "desc" },
+    });
+    return findings.map(this.toRecord);
+  }
+
+  async countByCategory(projectId: string, opts?: { days?: number }): Promise<CategoryCount[]> {
+    const since = opts?.days ? new Date(Date.now() - opts.days * 86400000) : undefined;
+    const findings = await this.prisma.finding.findMany({
+      where: {
+        run: {
+          projectId,
+          ...(since && { startedAt: { gte: since } }),
+        },
+      },
+      select: { category: true, severity: true },
+    });
+
+    const groups = new Map<string, CategoryCount>();
+    for (const f of findings) {
+      if (!groups.has(f.category)) {
+        groups.set(f.category, { category: f.category, critical: 0, high: 0, medium: 0, low: 0, info: 0 });
+      }
+      const g = groups.get(f.category)!;
+      const sev = f.severity as keyof Omit<CategoryCount, "category">;
+      if (sev in g) g[sev]++;
+    }
+    return Array.from(groups.values());
+  }
+
+  private toRecord(finding: any): FindingRecord {
+    return {
+      id: finding.id,
+      runId: finding.runId,
+      layer: finding.layer,
+      category: finding.category,
+      severity: finding.severity,
+      title: finding.title,
+      description: finding.description,
+      filePath: finding.filePath,
+      line: finding.line,
+      confidence: finding.confidence,
+      suggestion: finding.suggestion,
+      metadata: typeof finding.metadata === "object" ? finding.metadata : {},
+      dismissed: finding.dismissed,
+      createdAt: finding.createdAt,
+    };
+  }
+}
+
+// ═══════════════════════════════════════════════════════════════
 // FACTORY
 // ═══════════════════════════════════════════════════════════════
 
@@ -407,6 +501,7 @@ export async function createPrismaRepositories(databaseUrl: string): Promise<{
       members: new PrismaMemberRepository(prisma),
       audit: new PrismaAuditStore(prisma),
       health: new PrismaHealthCheck(prisma),
+      findings: new PrismaFindingRepository(prisma),
     },
     disconnect: () => prisma.$disconnect(),
   };
