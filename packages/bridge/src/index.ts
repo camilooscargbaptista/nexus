@@ -181,6 +181,16 @@ export type { UserStory, BDDScenario } from "./story-generator.js";
 export { SprintPlanner } from "./sprint-planner.js";
 export type { Sprint, SprintPlan, SprintPlannerConfig } from "./sprint-planner.js";
 
+// Sprint 14 — Architecture Generator
+export { C4Generator } from "./c4-generator.js";
+export type { C4Level, C4Diagram, C4Config } from "./c4-generator.js";
+
+export { DataModelGenerator } from "./data-model-generator.js";
+export type { DataModelSchema, ModelDefinition, FieldDefinition, RelationDefinition, APISpec, EndpointDefinition } from "./data-model-generator.js";
+
+export { ArchitectureGenerator } from "./architecture-generator.js";
+export type { ArchitectureDoc, DeploymentSpec, ArchitectureGeneratorConfig } from "./architecture-generator.js";
+
 // Re-export core types for convenience
 export type {
   NexusPipelineResult,
