@@ -171,3 +171,69 @@ export { FileStateStore, TrendTracker } from "./file-state-store.js";
 export type { FileStateStoreConfig, TrendPoint, TrendAnalysis } from "./file-state-store.js";
 export { createClaudeMeshProvider, createClaudeMeshProviders, createCustomMeshProvider, setupNexusMesh } from "./providers/claude-mesh-provider.js";
 export type { NexusMeshConfig } from "./providers/claude-mesh-provider.js";
+
+// Sprint 1 — Resilience Layer
+
+// Resilient HTTP Client
+export {
+  ResilientHttpClient,
+  CircuitBreakerState,
+  CircuitBreakerOpenError,
+  HttpTimeoutError,
+  HttpExhaustedRetriesError,
+} from "./resilient-http.js";
+export type {
+  ResilientHttpConfig,
+  HttpRequestOptions,
+  ResilientResponse,
+  HttpClientMetrics,
+} from "./resilient-http.js";
+
+// TTL Cache
+export { TTLCache } from "./ttl-cache.js";
+export type { TTLCacheConfig, CacheStats } from "./ttl-cache.js";
+
+// Rate Limiter
+export { RateLimiter } from "./rate-limiter.js";
+export type {
+  RateLimiterConfig,
+  AcquireResult,
+  RateLimiterStats,
+} from "./rate-limiter.js";
+
+// Sprint 3 — Batch Executor
+export { BatchExecutor } from "./batch-executor.js";
+export type {
+  BatchTask,
+  BatchTaskResult,
+  BatchResult,
+  BatchConfig,
+} from "./batch-executor.js";
+
+// Sprint 4 — Domain-Specific
+export {
+  validateCPF,
+  validateCNPJ,
+  validateCEP,
+  formatCPF,
+  formatCNPJ,
+  formatCEP,
+} from "./br-validators.js";
+export type { ValidationResult } from "./br-validators.js";
+
+export {
+  formatTable,
+  formatDuration,
+  formatScore,
+  formatSeverity,
+  formatFileList,
+  formatDiff,
+  formatSection,
+} from "./markdown-format.js";
+
+export { QueryPlanner } from "./query-planner.js";
+export type {
+  PlanStep,
+  ExecutionPlan,
+  PlannerContext,
+} from "./query-planner.js";

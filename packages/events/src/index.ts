@@ -201,3 +201,8 @@ export class NexusEventBus {
 
 // Singleton for shared use across the platform
 export const nexusEvents = new NexusEventBus();
+
+// Sprint 2 — Middleware Logging
+export { withLogging, withTiming, MiddlewareChain } from "./middleware.js";
+export type { MiddlewareContext, ToolHandler, Middleware } from "./middleware.js";
+

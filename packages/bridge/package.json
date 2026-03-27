@@ -16,16 +16,21 @@
     "clean": "rm -rf dist"
   },
   "dependencies": {
+    "@nexus/events": "*",
     "@nexus/types": "*",
-    "@nexus/events": "*"
+    "zod": "^4.3.6"
   },
   "peerDependencies": {
     "@girardelli/architect": ">=3.0.0",
     "sentinel-method": ">=2.0.0"
   },
   "peerDependenciesMeta": {
-    "@girardelli/architect": { "optional": true },
-    "sentinel-method": { "optional": true }
+    "@girardelli/architect": {
+      "optional": true
+    },
+    "sentinel-method": {
+      "optional": true
+    }
   },
   "license": "MIT"
 }
