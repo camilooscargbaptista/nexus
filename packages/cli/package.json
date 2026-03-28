@@ -1,6 +1,6 @@
 {
   "name": "@camilooscargbaptista/nexus-cli",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Nexus CLI — Autonomous Engineering Intelligence from the terminal",
   "type": "module",
   "main": "dist/index.js",

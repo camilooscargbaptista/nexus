@@ -7,7 +7,7 @@
     "rootDir": "./src",
     "types": ["node"],
     "paths": {
-      "@nexus/types": ["../types/src"]
+      "@camilooscargbaptista/nexus-types": ["../types/src"]
     }
   },
   "include": ["src/**/*.ts"],

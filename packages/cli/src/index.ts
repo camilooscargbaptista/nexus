@@ -189,7 +189,7 @@ async function cmdAnalyze(projectPath: string, jsonMode = false): Promise<void> 
       projectPath: absPath,
       perception: { enabled: true },
       reasoning: { enabled: true },
-      validation: { enabled: true, securityLevel: "standard", testingThreshold: 70 },
+      validation: { enabled: false },
     } as any,
     { eventBus },
   );

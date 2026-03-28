@@ -18,6 +18,7 @@
     "node": ">=18.0.0"
   },
   "dependencies": {
+    "@girardelli/architect": "^4.0.0",
     "@jest/globals": "^30.3.0",
     "@modelcontextprotocol/sdk": "^1.28.0",
     "@types/jest": "^30.0.0",
