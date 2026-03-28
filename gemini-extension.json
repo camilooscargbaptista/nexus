@@ -1,0 +1,20 @@
+{
+  "name": "nexus",
+  "displayName": "Nexus — Engineering Intelligence",
+  "version": "0.2.0",
+  "description": "Autonomous engineering intelligence: architecture analysis, quality validation, auto-remediation.",
+  "author": "Girardelli Tecnologia",
+  "entryPoint": "./hooks/session-start",
+  "capabilities": [
+    "codebase-analysis",
+    "architecture-scoring",
+    "quality-validation",
+    "auto-remediation"
+  ],
+  "commands": {
+    "analyze": "nexus analyze .",
+    "score": "nexus score .",
+    "status": "nexus status",
+    "history": "nexus history"
+  }
+}
