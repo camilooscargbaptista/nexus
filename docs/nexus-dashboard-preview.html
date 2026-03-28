@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NEXUS Dashboard — Preview</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+  :root {
+    --bg: #0F172A; --surface: #1E293B; --card: #334155;
+    --amber: #F59E0B; --amber-dark: #D97706;
+    --green: #10B981; --red: #EF4444; --blue: #3B82F6;
+    --text: #F1F5F9; --muted: #94A3B8;
+    --radius: 12px;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+
+  .layout { display: flex; min-height: 100vh; }
+
+  /* Sidebar */
+  .sidebar { width: 240px; background: var(--surface); padding: 24px 16px; border-right: 1px solid #475569; flex-shrink: 0; }
+  .logo { display: flex; align-items: center; gap: 10px; margin-bottom: 32px; }
+  .logo-icon { width: 36px; height: 36px; background: var(--amber); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 900; color: var(--bg); font-size: 18px; }
+  .logo-text { font-size: 20px; font-weight: 800; letter-spacing: 2px; }
+  .nav-item { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 8px; cursor: pointer; color: var(--muted); font-size: 14px; margin-bottom: 4px; transition: all 0.2s; }
+  .nav-item:hover, .nav-item.active { background: rgba(245,158,11,0.1); color: var(--amber); }
+  .nav-item svg { width: 18px; height: 18px; }
+  .nav-section { font-size: 11px; color: #64748B; text-transform: uppercase; letter-spacing: 1.5px; margin: 20px 0 8px 12px; }
+
+  /* Main */
+  .main { flex: 1; padding: 24px 32px; overflow-y: auto; }
+  .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
+  .header h1 { font-size: 24px; font-weight: 700; }
+  .header-actions { display: flex; gap: 12px; }
+  .btn { padding: 8px 16px; border-radius: 8px; border: none; cursor: pointer; font-size: 13px; font-weight: 600; transition: all 0.2s; }
+  .btn-primary { background: var(--amber); color: var(--bg); }
+  .btn-primary:hover { background: var(--amber-dark); }
+  .btn-outline { background: transparent; border: 1px solid #475569; color: var(--text); }
+
+  /* Stats Row */
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 24px; }
+  .stat-card { background: var(--surface); border-radius: var(--radius); padding: 20px; position: relative; overflow: hidden; }
+  .stat-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; }
+  .stat-card.amber::before { background: var(--amber); }
+  .stat-card.green::before { background: var(--green); }
+  .stat-card.blue::before { background: var(--blue); }
+  .stat-card.red::before { background: var(--red); }
+  .stat-label { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+  .stat-value { font-size: 32px; font-weight: 800; }
+  .stat-change { font-size: 12px; margin-top: 4px; }
+  .stat-change.up { color: var(--green); }
+  .stat-change.down { color: var(--red); }
+  .stat-sparkline { position: absolute; bottom: 12px; right: 16px; width: 80px; height: 30px; }
+
+  /* Charts Grid */
+  .charts-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 16px; margin-bottom: 24px; }
+  .chart-card { background: var(--surface); border-radius: var(--radius); padding: 20px; }
+  .chart-title { font-size: 14px; font-weight: 600; margin-bottom: 16px; color: var(--muted); }
+  .chart-container { position: relative; height: 220px; }
+
+  /* Findings Table */
+  .table-card { background: var(--surface); border-radius: var(--radius); padding: 20px; margin-bottom: 24px; }
+  .table-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+  table { width: 100%; border-collapse: collapse; }
+  th { text-align: left; font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; padding: 8px 12px; border-bottom: 1px solid #475569; }
+  td { padding: 12px; font-size: 13px; border-bottom: 1px solid rgba(71,85,105,0.5); }
+  .severity { display: inline-flex; align-items: center; gap: 6px; padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: 600; }
+  .severity.critical { background: rgba(239,68,68,0.15); color: var(--red); }
+  .severity.high { background: rgba(245,158,11,0.15); color: var(--amber); }
+  .severity.medium { background: rgba(59,130,246,0.15); color: var(--blue); }
+  .severity.low { background: rgba(16,185,129,0.15); color: var(--green); }
+  .dot { width: 6px; height: 6px; border-radius: 50%; display: inline-block; }
+  .dot.critical { background: var(--red); }
+  .dot.high { background: var(--amber); }
+  .dot.medium { background: var(--blue); }
+  .dot.low { background: var(--green); }
+
+  /* Pipeline Runs */
+  .runs-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .run-card { background: var(--card); border-radius: 8px; padding: 16px; }
+  .run-status { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+  .run-status .indicator { width: 8px; height: 8px; border-radius: 50%; }
+  .run-status .indicator.success { background: var(--green); box-shadow: 0 0 6px var(--green); }
+  .run-status .indicator.running { background: var(--blue); box-shadow: 0 0 6px var(--blue); animation: pulse 1.5s infinite; }
+  .run-status .indicator.failed { background: var(--red); box-shadow: 0 0 6px var(--red); }
+  .run-meta { font-size: 11px; color: var(--muted); }
+  .run-score { font-size: 24px; font-weight: 800; color: var(--amber); }
+  .progress-bar { height: 4px; background: #475569; border-radius: 2px; margin-top: 8px; overflow: hidden; }
+  .progress-fill { height: 100%; border-radius: 2px; transition: width 0.5s; }
+  .progress-fill.green { background: var(--green); }
+  .progress-fill.amber { background: var(--amber); }
+  .progress-fill.red { background: var(--red); }
+
+  @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+  /* Score Gauge */
+  .gauge-container { display: flex; justify-content: center; align-items: center; flex-direction: column; }
+  .gauge { position: relative; width: 160px; height: 160px; }
+  .gauge canvas { width: 160px; height: 160px; }
+  .gauge-value { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 36px; font-weight: 900; color: var(--amber); }
+  .gauge-label { font-size: 12px; color: var(--muted); margin-top: 8px; }
+
+  /* Tabs */
+  .tabs { display: flex; gap: 0; margin-bottom: 24px; border-bottom: 1px solid #475569; }
+  .tab { padding: 10px 20px; font-size: 13px; color: var(--muted); cursor: pointer; border-bottom: 2px solid transparent; transition: all 0.2s; }
+  .tab.active { color: var(--amber); border-bottom-color: var(--amber); }
+</style>
+</head>
+<body>
+<div class="layout">
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="logo">
+      <div class="logo-icon">N</div>
+      <span class="logo-text">NEXUS</span>
+    </div>
+    <div class="nav-section">Analytics</div>
+    <div class="nav-item active" onclick="showView('dashboard')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+      Dashboard
+    </div>
+    <div class="nav-item" onclick="showView('findings')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v2m0 4h.01M5.07 19h13.86c1.54 0 2.5-1.67 1.73-2.99L13.73 4.01c-.77-1.33-2.69-1.33-3.46 0L3.34 16.01C2.57 17.33 3.53 19 5.07 19z"/></svg>
+      Findings
+    </div>
+    <div class="nav-item" onclick="showView('pipeline')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+      Pipeline
+    </div>
+    <div class="nav-section">Management</div>
+    <div class="nav-item" onclick="showView('team')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      Team
+    </div>
+    <div class="nav-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+      Settings
+    </div>
+
+    <div style="position: absolute; bottom: 20px; left: 16px; right: 16px;">
+      <div style="background: rgba(245,158,11,0.1); border-radius: 8px; padding: 12px; font-size: 11px; color: var(--muted);">
+        <div style="color: var(--amber); font-weight: 600; margin-bottom: 4px;">Nexus v0.1.0</div>
+        909 tests passing<br>10 packages
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main">
+    <!-- Dashboard View -->
+    <div id="view-dashboard">
+      <div class="header">
+        <h1>Dashboard</h1>
+        <div class="header-actions">
+          <button class="btn btn-outline">Export</button>
+          <button class="btn btn-primary" onclick="runAnalysis()">Run Analysis</button>
+        </div>
+      </div>
+
+      <div class="stats">
+        <div class="stat-card amber">
+          <div class="stat-label">Overall Score</div>
+          <div class="stat-value" style="color: var(--amber);">78</div>
+          <div class="stat-change up">+3 vs last run</div>
+          <canvas class="stat-sparkline" id="spark1"></canvas>
+        </div>
+        <div class="stat-card green">
+          <div class="stat-label">Tests Passing</div>
+          <div class="stat-value" style="color: var(--green);">909</div>
+          <div class="stat-change up">+15 this sprint</div>
+          <canvas class="stat-sparkline" id="spark2"></canvas>
+        </div>
+        <div class="stat-card red">
+          <div class="stat-label">Anti-Patterns</div>
+          <div class="stat-value" style="color: var(--red);">12</div>
+          <div class="stat-change up">-4 vs last run</div>
+          <canvas class="stat-sparkline" id="spark3"></canvas>
+        </div>
+        <div class="stat-card blue">
+          <div class="stat-label">Files Analyzed</div>
+          <div class="stat-value" style="color: var(--blue);">170</div>
+          <div class="stat-change up">+23 this sprint</div>
+          <canvas class="stat-sparkline" id="spark4"></canvas>
+        </div>
+      </div>
+
+      <div class="charts-grid">
+        <div class="chart-card">
+          <div class="chart-title">Score Trend (Last 30 Days)</div>
+          <div class="chart-container"><canvas id="trendChart"></canvas></div>
+        </div>
+        <div class="chart-card">
+          <div class="chart-title">Quality Score</div>
+          <div class="chart-container gauge-container">
+            <div class="gauge"><canvas id="gaugeChart"></canvas><div class="gauge-value">78</div></div>
+            <div class="gauge-label">GOOD — Above threshold</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="charts-grid">
+        <div class="chart-card">
+          <div class="chart-title">Findings by Category</div>
+          <div class="chart-container"><canvas id="findingsChart"></canvas></div>
+        </div>
+        <div class="chart-card">
+          <div class="chart-title">Recent Pipeline Runs</div>
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <div class="run-card" style="background: var(--card);">
+              <div class="run-status"><span class="indicator success"></span><span style="font-size:13px; font-weight:600;">Sprint 10 — Final</span></div>
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <div class="run-meta">26 Mar 2026, 12:30</div>
+                <div class="run-score">78</div>
+              </div>
+              <div class="progress-bar"><div class="progress-fill green" style="width: 78%;"></div></div>
+            </div>
+            <div class="run-card" style="background: var(--card);">
+              <div class="run-status"><span class="indicator success"></span><span style="font-size:13px; font-weight:600;">Sprint 9.2 — Dashboard</span></div>
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <div class="run-meta">24 Mar 2026, 18:45</div>
+                <div class="run-score">75</div>
+              </div>
+              <div class="progress-bar"><div class="progress-fill green" style="width: 75%;"></div></div>
+            </div>
+            <div class="run-card" style="background: var(--card);">
+              <div class="run-status"><span class="indicator failed"></span><span style="font-size:13px; font-weight:600;">Sprint 9.1 — Cloud API</span></div>
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <div class="run-meta">22 Mar 2026, 09:12</div>
+                <div class="run-score">71</div>
+              </div>
+              <div class="progress-bar"><div class="progress-fill amber" style="width: 71%;"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Findings View -->
+    <div id="view-findings" style="display:none;">
+      <div class="header">
+        <h1>Findings</h1>
+        <div class="header-actions">
+          <button class="btn btn-outline">Filter</button>
+          <button class="btn btn-outline">Export CSV</button>
+        </div>
+      </div>
+      <div class="tabs">
+        <div class="tab active">All (12)</div>
+        <div class="tab">Critical (2)</div>
+        <div class="tab">High (4)</div>
+        <div class="tab">Medium (3)</div>
+        <div class="tab">Low (3)</div>
+      </div>
+      <div class="table-card">
+        <table>
+          <thead><tr><th>Severity</th><th>Finding</th><th>File</th><th>Category</th><th>Score Impact</th></tr></thead>
+          <tbody>
+            <tr><td><span class="severity critical"><span class="dot critical"></span>Critical</span></td><td>God Class detected (1200+ lines)</td><td>packages/core/src/orchestrator.ts</td><td>Architecture</td><td style="color:var(--red)">-8</td></tr>
+            <tr><td><span class="severity critical"><span class="dot critical"></span>Critical</span></td><td>Circular dependency cycle (3 nodes)</td><td>packages/bridge/src/</td><td>Dependencies</td><td style="color:var(--red)">-6</td></tr>
+            <tr><td><span class="severity high"><span class="dot high"></span>High</span></td><td>Missing error boundaries in pipeline</td><td>packages/bridge/src/nexus-pipeline.ts</td><td>Resilience</td><td style="color:var(--amber)">-4</td></tr>
+            <tr><td><span class="severity high"><span class="dot high"></span>High</span></td><td>Hardcoded credentials in config</td><td>packages/cloud/src/config.ts</td><td>Security</td><td style="color:var(--amber)">-4</td></tr>
+            <tr><td><span class="severity high"><span class="dot high"></span>High</span></td><td>No retry logic in external API calls</td><td>packages/cloud/src/services/</td><td>Resilience</td><td style="color:var(--amber)">-3</td></tr>
+            <tr><td><span class="severity high"><span class="dot high"></span>High</span></td><td>Missing input validation on routes</td><td>packages/cloud/src/routes/</td><td>Security</td><td style="color:var(--amber)">-3</td></tr>
+            <tr><td><span class="severity medium"><span class="dot medium"></span>Medium</span></td><td>Complex method (cyclomatic > 15)</td><td>packages/bridge/src/toolkit-router.ts</td><td>Complexity</td><td style="color:var(--blue)">-2</td></tr>
+            <tr><td><span class="severity medium"><span class="dot medium"></span>Medium</span></td><td>Unused exports in index barrel</td><td>packages/types/src/index.ts</td><td>Maintenance</td><td style="color:var(--blue)">-1</td></tr>
+            <tr><td><span class="severity medium"><span class="dot medium"></span>Medium</span></td><td>Missing JSDoc on public API</td><td>packages/core/src/</td><td>Documentation</td><td style="color:var(--blue)">-1</td></tr>
+            <tr><td><span class="severity low"><span class="dot low"></span>Low</span></td><td>Console.log in production code</td><td>packages/cli/src/index.ts</td><td>Code Quality</td><td style="color:var(--green)">-1</td></tr>
+            <tr><td><span class="severity low"><span class="dot low"></span>Low</span></td><td>Magic numbers in threshold config</td><td>packages/bridge/src/reaction-engine.ts</td><td>Code Quality</td><td style="color:var(--green)">-1</td></tr>
+            <tr><td><span class="severity low"><span class="dot low"></span>Low</span></td><td>Inconsistent naming convention</td><td>packages/events/src/index.ts</td><td>Style</td><td style="color:var(--green)">0</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Pipeline View -->
+    <div id="view-pipeline" style="display:none;">
+      <div class="header">
+        <h1>Pipeline Runs</h1>
+        <div class="header-actions">
+          <button class="btn btn-primary" onclick="runAnalysis()">Trigger Run</button>
+        </div>
+      </div>
+      <div class="runs-grid" id="runsGrid"></div>
+    </div>
+
+    <!-- Team View -->
+    <div id="view-team" style="display:none;">
+      <div class="header">
+        <h1>Team</h1>
+      </div>
+      <div class="runs-grid" id="teamGrid"></div>
+    </div>
+  </main>
+</div>
+
+<script>
+// Navigation
+function showView(name) {
+  document.querySelectorAll('[id^="view-"]').forEach(v => v.style.display = 'none');
+  document.getElementById('view-' + name).style.display = 'block';
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  event.currentTarget.classList.add('active');
+}
+
+// Sparklines
+function drawSparkline(id, data, color) {
+  const canvas = document.getElementById(id);
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const w = canvas.width = 80; const h = canvas.height = 30;
+  const max = Math.max(...data); const min = Math.min(...data);
+  const range = max - min || 1;
+  ctx.strokeStyle = color; ctx.lineWidth = 2; ctx.beginPath();
+  data.forEach((v, i) => {
+    const x = (i / (data.length - 1)) * w;
+    const y = h - ((v - min) / range) * h;
+    i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+  });
+  ctx.stroke();
+}
+
+drawSparkline('spark1', [65,68,70,72,71,74,75,78], '#F59E0B');
+drawSparkline('spark2', [820,835,850,862,878,889,894,909], '#10B981');
+drawSparkline('spark3', [24,22,20,18,16,15,14,12], '#EF4444');
+drawSparkline('spark4', [110,120,128,135,140,148,155,170], '#3B82F6');
+
+// Score Trend Chart
+new Chart(document.getElementById('trendChart'), {
+  type: 'line',
+  data: {
+    labels: ['Mar 1','Mar 5','Mar 8','Mar 12','Mar 15','Mar 18','Mar 20','Mar 22','Mar 24','Mar 26'],
+    datasets: [{
+      label: 'Score',
+      data: [62,65,68,70,72,71,74,75,75,78],
+      borderColor: '#F59E0B', backgroundColor: 'rgba(245,158,11,0.1)',
+      fill: true, tension: 0.4, pointRadius: 4, pointBackgroundColor: '#F59E0B'
+    },{
+      label: 'Threshold',
+      data: [70,70,70,70,70,70,70,70,70,70],
+      borderColor: '#475569', borderDash: [5,5], pointRadius: 0, fill: false
+    }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    scales: { y: { min: 50, max: 100, grid: { color: 'rgba(71,85,105,0.3)' }, ticks: { color: '#94A3B8' } }, x: { grid: { display: false }, ticks: { color: '#94A3B8' } } },
+    plugins: { legend: { labels: { color: '#94A3B8' } } }
+  }
+});
+
+// Gauge
+const gaugeCtx = document.getElementById('gaugeChart').getContext('2d');
+new Chart(gaugeCtx, {
+  type: 'doughnut',
+  data: {
+    datasets: [{
+      data: [78, 22],
+      backgroundColor: ['#F59E0B', '#334155'],
+      borderWidth: 0
+    }]
+  },
+  options: {
+    cutout: '75%', rotation: -90, circumference: 180,
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { display: false }, tooltip: { enabled: false } }
+  }
+});
+
+// Findings Bar Chart
+new Chart(document.getElementById('findingsChart'), {
+  type: 'bar',
+  data: {
+    labels: ['Architecture', 'Security', 'Resilience', 'Complexity', 'Maintenance', 'Code Quality', 'Style'],
+    datasets: [{
+      data: [2, 2, 2, 1, 1, 2, 1],
+      backgroundColor: ['#EF4444','#F59E0B','#F59E0B','#3B82F6','#3B82F6','#10B981','#10B981'],
+      borderRadius: 6
+    }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false, indexAxis: 'y',
+    scales: { x: { grid: { color: 'rgba(71,85,105,0.3)' }, ticks: { color: '#94A3B8' } }, y: { grid: { display: false }, ticks: { color: '#94A3B8' } } },
+    plugins: { legend: { display: false } }
+  }
+});
+
+// Pipeline Runs
+const runs = [
+  { name: 'Sprint 10 — Wire Everything', date: '26 Mar 2026, 12:30', score: 78, status: 'success', duration: '4m 23s', tests: 909 },
+  { name: 'Sprint 9.2 — Dashboard', date: '24 Mar 2026, 18:45', score: 75, status: 'success', duration: '3m 51s', tests: 894 },
+  { name: 'Sprint 9.1 — Cloud API', date: '22 Mar 2026, 09:12', score: 71, status: 'failed', duration: '5m 02s', tests: 862 },
+  { name: 'Sprint 8.5 — Octopus Patterns', date: '20 Mar 2026, 14:20', score: 72, status: 'success', duration: '3m 15s', tests: 850 },
+  { name: 'Sprint 8 — Autonomy Module', date: '18 Mar 2026, 10:00', score: 70, status: 'success', duration: '2m 48s', tests: 835 },
+  { name: 'Sprint 7 — Event System', date: '15 Mar 2026, 16:30', score: 68, status: 'success', duration: '2m 12s', tests: 820 },
+];
+
+const runsGrid = document.getElementById('runsGrid');
+runs.forEach(r => {
+  const scoreColor = r.score >= 75 ? 'var(--green)' : r.score >= 60 ? 'var(--amber)' : 'var(--red)';
+  const barColor = r.score >= 75 ? 'green' : r.score >= 60 ? 'amber' : 'red';
+  runsGrid.innerHTML += `
+    <div class="run-card">
+      <div class="run-status"><span class="indicator ${r.status}"></span><span style="font-size:14px; font-weight:600;">${r.name}</span></div>
+      <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-top:8px;">
+        <div><div class="run-meta">${r.date}</div><div class="run-meta" style="margin-top:2px;">${r.duration} · ${r.tests} tests</div></div>
+        <div class="run-score" style="color:${scoreColor}">${r.score}</div>
+      </div>
+      <div class="progress-bar"><div class="progress-fill ${barColor}" style="width:${r.score}%;"></div></div>
+    </div>`;
+});
+
+// Team
+const team = [
+  { name: 'Camilo Girardelli', role: 'CTO / Lead Architect', commits: 342, prs: 89, score: 92, avatar: 'CG' },
+  { name: 'Claude Opus', role: 'AI Engineering Partner', commits: 156, prs: 45, score: 95, avatar: 'CO' },
+  { name: 'Nexus Bot', role: 'Autonomous Agent', commits: 78, prs: 23, score: 88, avatar: 'NB' },
+];
+
+const teamGrid = document.getElementById('teamGrid');
+team.forEach(t => {
+  teamGrid.innerHTML += `
+    <div class="run-card" style="text-align:center;">
+      <div style="width:60px; height:60px; border-radius:50%; background:var(--amber); display:flex; align-items:center; justify-content:center; font-weight:800; color:var(--bg); font-size:20px; margin:0 auto 12px;">${t.avatar}</div>
+      <div style="font-size:16px; font-weight:700;">${t.name}</div>
+      <div style="font-size:12px; color:var(--muted); margin-bottom:12px;">${t.role}</div>
+      <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px; text-align:center;">
+        <div><div style="font-size:20px; font-weight:800; color:var(--blue);">${t.commits}</div><div style="font-size:10px; color:var(--muted);">COMMITS</div></div>
+        <div><div style="font-size:20px; font-weight:800; color:var(--green);">${t.prs}</div><div style="font-size:10px; color:var(--muted);">PRs</div></div>
+        <div><div style="font-size:20px; font-weight:800; color:var(--amber);">${t.score}</div><div style="font-size:10px; color:var(--muted);">SCORE</div></div>
+      </div>
+    </div>`;
+});
+
+// Run Analysis animation
+function runAnalysis() {
+  const btn = event.currentTarget;
+  btn.textContent = 'Analyzing...';
+  btn.style.opacity = '0.7';
+  setTimeout(() => { btn.textContent = 'Run Analysis'; btn.style.opacity = '1'; alert('Analysis complete! Score: 78 (+3)'); }, 2000);
+}
+</script>
+</body>
+</html>
