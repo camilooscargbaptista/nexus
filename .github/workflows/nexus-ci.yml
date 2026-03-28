@@ -25,7 +25,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Run Nexus
-        uses: ./.github/actions/nexus-action
+        uses: camilooscargbaptista/nexus-action@v1
         with:
           threshold: 70
           fail-on-critical: true
