@@ -1,5 +1,5 @@
 /**
- * @nexus/events — Middleware Logging
+ * @camilooscargbaptista/nexus-events — Middleware Logging
  *
  * HOF (Higher-Order Function) para wrapping de tool handlers com logging automático,
  * correlation IDs e timing. Composável via MiddlewareChain.

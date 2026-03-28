@@ -1,5 +1,5 @@
 /**
- * @nexus/bridge — Intent Classifier
+ * @camilooscargbaptista/nexus-bridge — Intent Classifier
  *
  * Classifica queries em categorias de intent usando pattern matching
  * e opcionalmente LLM para queries ambíguas.

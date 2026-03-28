@@ -1,5 +1,5 @@
 /**
- * @nexus/core — Core orchestration, LLM abstraction, agents, memory, and fallback
+ * @camilooscargbaptista/nexus-core — Core orchestration, LLM abstraction, agents, memory, and fallback
  *
  * @author Camilo Girardelli — Girardelli Tecnologia
  * @license MIT

@@ -1,5 +1,5 @@
 /**
- * @nexus/core — ResilientHttpClient Tests
+ * @camilooscargbaptista/nexus-core — ResilientHttpClient Tests
  */
 
 import { describe, it, expect, beforeEach, jest } from "@jest/globals";

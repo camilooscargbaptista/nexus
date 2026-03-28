@@ -1,5 +1,5 @@
 /**
- * @nexus/bridge — Story Generator
+ * @camilooscargbaptista/nexus-bridge — Story Generator
  *
  * Gera User Stories com acceptance criteria e BDD scenarios
  * a partir de Epics.

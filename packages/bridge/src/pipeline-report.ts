@@ -1,12 +1,12 @@
 /**
- * @nexus/bridge — Pipeline Report Generator
+ * @camilooscargbaptista/nexus-bridge — Pipeline Report Generator
  *
  * Gera relatório Markdown da execução do pipeline autônomo.
  *
  * @author Camilo Girardelli — Girardelli Tecnologia
  */
 
-import { formatTable, formatSection } from "@nexus/core";
+import { formatTable, formatSection } from "@camilooscargbaptista/nexus-core";
 import type { PipelineResult } from "./pipeline-orchestrator.js";
 
 // ═══════════════════════════════════════════════════════════════

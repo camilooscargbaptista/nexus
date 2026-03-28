@@ -1,5 +1,5 @@
 /**
- * @nexus/core — Markdown Formatting
+ * @camilooscargbaptista/nexus-core — Markdown Formatting
  *
  * Utilitários centralizados de formatação Markdown para CLI e reports.
  *

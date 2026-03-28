@@ -1,5 +1,5 @@
 /**
- * @nexus/core — Query Planner Tests
+ * @camilooscargbaptista/nexus-core — Query Planner Tests
  */
 
 import { describe, it, expect } from "@jest/globals";

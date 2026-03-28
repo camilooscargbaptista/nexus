@@ -8,7 +8,7 @@ import type {
   ConsensusResult,
   QualityGateResult,
 } from "../validation-server.js";
-import type { ValidationSnapshot } from "@nexus/types";
+import type { ValidationSnapshot } from "@camilooscargbaptista/nexus-types";
 import { Client } from "@modelcontextprotocol/sdk/client/index.js";
 import { InMemoryTransport } from "@modelcontextprotocol/sdk/inMemory.js";
 

@@ -1,5 +1,5 @@
 /**
- * @nexus/core — Health Supervisor
+ * @camilooscargbaptista/nexus-core — Health Supervisor
  *
  * Agrega sinais de saúde do codebase: TODO/FIXME count,
  * complexity trends, score velocity, test coverage deltas.

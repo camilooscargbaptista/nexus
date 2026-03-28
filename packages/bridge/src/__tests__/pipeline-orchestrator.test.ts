@@ -1,5 +1,5 @@
 /**
- * @nexus/bridge — Pipeline Orchestrator Tests (Sprint 11 — FINAL)
+ * @camilooscargbaptista/nexus-bridge — Pipeline Orchestrator Tests (Sprint 11 — FINAL)
  */
 
 import { describe, it, expect } from "@jest/globals";

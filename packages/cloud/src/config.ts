@@ -1,5 +1,5 @@
 /**
- * @nexus/cloud — Configuration
+ * @camilooscargbaptista/nexus-cloud — Configuration
  * Loads from environment with sensible defaults for development.
  *
  * @author Camilo Girardelli — Girardelli Tecnologia

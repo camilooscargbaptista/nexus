@@ -1,5 +1,5 @@
 /**
- * @nexus/core — Context Window Manager Tests
+ * @camilooscargbaptista/nexus-core — Context Window Manager Tests
  */
 
 import { describe, it, expect } from "@jest/globals";

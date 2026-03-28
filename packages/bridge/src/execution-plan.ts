@@ -1,5 +1,5 @@
 /**
- * @nexus/bridge — Execution Plan
+ * @camilooscargbaptista/nexus-bridge — Execution Plan
  *
  * Plano de execução que descreve uma sequência de passos
  * a serem executados pelo pipeline autônomo.

@@ -1,5 +1,5 @@
 /**
- * @nexus/core — Memory System
+ * @camilooscargbaptista/nexus-core — Memory System
  *
  * Port do memory.py para TypeScript.
  * ShortTermMemory (FIFO), LongTermMemory (cosine similarity), HybridMemory.

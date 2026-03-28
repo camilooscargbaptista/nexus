@@ -1,5 +1,5 @@
 {
-  "name": "@nexus/bridge",
+  "name": "@camilooscargbaptista/nexus-bridge",
   "version": "0.1.0",
   "description": "Integration layer connecting Architect, CTO Toolkit, and Sentinel",
   "main": "dist/index.js",
@@ -16,8 +16,8 @@
     "clean": "rm -rf dist"
   },
   "dependencies": {
-    "@nexus/events": "*",
-    "@nexus/types": "*",
+    "@camilooscargbaptista/nexus-events": "*",
+    "@camilooscargbaptista/nexus-types": "*",
     "zod": "^4.3.6"
   },
   "peerDependencies": {

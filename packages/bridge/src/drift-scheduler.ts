@@ -11,8 +11,8 @@
  * @license MIT
  */
 
-import { NexusEventType, NexusLayer } from "@nexus/types";
-import type { NexusEvent } from "@nexus/types";
+import { NexusEventType, NexusLayer } from "@camilooscargbaptista/nexus-types";
+import type { NexusEvent } from "@camilooscargbaptista/nexus-types";
 import {
   DriftDetector,
   type ADRConstraint,

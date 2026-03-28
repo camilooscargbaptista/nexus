@@ -1,5 +1,5 @@
 /**
- * @nexus/core — Constitution Engine + Self-Reflection Tests
+ * @camilooscargbaptista/nexus-core — Constitution Engine + Self-Reflection Tests
  */
 
 import { describe, it, expect, jest } from "@jest/globals";

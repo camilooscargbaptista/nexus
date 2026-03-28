@@ -1,5 +1,5 @@
 /**
- * @nexus/events — Event bus for cross-layer communication
+ * @camilooscargbaptista/nexus-events — Event bus for cross-layer communication
  *
  * The nervous system of Nexus. Every detection, guidance, and validation
  * flows through this bus, enabling the closed feedback loop:
@@ -15,7 +15,7 @@ import type {
   NexusEventType,
   NexusEventMetadata,
   NexusLayer,
-} from "@nexus/types";
+} from "@camilooscargbaptista/nexus-types";
 
 // ═══════════════════════════════════════════════════════════════
 // EVENT HANDLER TYPES

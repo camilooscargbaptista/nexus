@@ -1,5 +1,5 @@
 /**
- * @nexus/core — Context Window Manager
+ * @camilooscargbaptista/nexus-core — Context Window Manager
  *
  * Gerencia a janela de contexto completa para prompts LLM.
  * Combina TokenEstimator + ContextPrioritizer + prompt assembly.

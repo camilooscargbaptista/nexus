@@ -4,8 +4,8 @@
 
 import { DriftScheduler } from "../drift-scheduler.js";
 import type { CodebaseInspector, ADRConstraint } from "../drift-detector.js";
-import { NexusEventType } from "@nexus/types";
-import type { NexusEvent } from "@nexus/types";
+import { NexusEventType } from "@camilooscargbaptista/nexus-types";
+import type { NexusEvent } from "@camilooscargbaptista/nexus-types";
 
 // ═══════════════════════════════════════════════════════════════
 // HELPERS

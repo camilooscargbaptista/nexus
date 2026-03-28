@@ -1,5 +1,5 @@
 /**
- * @nexus/bridge — Spec Generator
+ * @camilooscargbaptista/nexus-bridge — Spec Generator
  *
  * Gerador de tech specs completos a partir de uma descrição textual.
  * Combina SpecParser + SpecTemplate para produzir documentação

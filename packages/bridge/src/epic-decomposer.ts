@@ -1,5 +1,5 @@
 /**
- * @nexus/bridge — Epic Decomposer
+ * @camilooscargbaptista/nexus-bridge — Epic Decomposer
  *
  * Decompõe features/specs em Epics estruturados.
  * Input: ParsedSpec → Output: lista de Epics com dependências.

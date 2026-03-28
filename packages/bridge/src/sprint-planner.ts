@@ -1,5 +1,5 @@
 /**
- * @nexus/bridge — Sprint Planner
+ * @camilooscargbaptista/nexus-bridge — Sprint Planner
  *
  * Distribui User Stories em Sprints respeitando dependências,
  * velocity e prioridade (MoSCoW).
@@ -9,7 +9,7 @@
 
 import type { Epic } from "./epic-decomposer.js";
 import type { UserStory } from "./story-generator.js";
-import { formatTable, formatSection } from "@nexus/core";
+import { formatTable, formatSection } from "@camilooscargbaptista/nexus-core";
 
 // ═══════════════════════════════════════════════════════════════
 // TYPES

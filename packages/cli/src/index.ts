@@ -14,9 +14,9 @@
 
 import { resolve } from "node:path";
 import { existsSync, mkdirSync, writeFileSync, readFileSync } from "node:fs";
-import { NexusPipeline } from "@nexus/bridge";
-import { NexusEventBus } from "@nexus/events";
-import type { NexusPipelineResult } from "@nexus/types";
+import { NexusPipeline } from "@camilooscargbaptista/nexus-bridge";
+import { NexusEventBus } from "@camilooscargbaptista/nexus-events";
+import type { NexusPipelineResult } from "@camilooscargbaptista/nexus-types";
 
 // ═══════════════════════════════════════════════════════════════
 // CONSTANTS

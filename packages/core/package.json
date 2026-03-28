@@ -1,5 +1,5 @@
 {
-  "name": "@nexus/core",
+  "name": "@camilooscargbaptista/nexus-core",
   "version": "0.1.0",
   "description": "Core orchestration, LLM abstraction, agents, memory, and fallback for the Nexus platform",
   "main": "dist/index.js",
@@ -16,8 +16,8 @@
     "clean": "rm -rf dist"
   },
   "dependencies": {
-    "@nexus/types": "*",
-    "@nexus/events": "*"
+    "@camilooscargbaptista/nexus-types": "*",
+    "@camilooscargbaptista/nexus-events": "*"
   },
   "license": "MIT"
 }

@@ -1,5 +1,5 @@
 /**
- * @nexus/bridge — Spec Template
+ * @camilooscargbaptista/nexus-bridge — Spec Template
  *
  * Templates de documentação técnica parametrizáveis.
  * Gera seções Markdown padronizadas: Overview, Architecture,
@@ -8,7 +8,7 @@
  * @author Camilo Girardelli — Girardelli Tecnologia
  */
 
-import { formatTable, formatSection } from "@nexus/core";
+import { formatTable, formatSection } from "@camilooscargbaptista/nexus-core";
 
 // ═══════════════════════════════════════════════════════════════
 // TYPES

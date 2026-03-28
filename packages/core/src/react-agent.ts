@@ -1,5 +1,5 @@
 /**
- * @nexus/core — ReActAgent
+ * @camilooscargbaptista/nexus-core — ReActAgent
  *
  * Port do react.py para TypeScript.
  * Implementa o loop Think → Act → Observe para raciocínio iterativo.

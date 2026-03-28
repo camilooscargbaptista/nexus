@@ -1,5 +1,5 @@
 {
-  "name": "@nexus/types",
+  "name": "@camilooscargbaptista/nexus-types",
   "version": "0.1.0",
   "description": "Shared type definitions for the Nexus platform",
   "main": "dist/index.js",

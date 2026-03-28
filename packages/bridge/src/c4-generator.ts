@@ -1,5 +1,5 @@
 /**
- * @nexus/bridge — C4 Generator
+ * @camilooscargbaptista/nexus-bridge — C4 Generator
  *
  * Gera diagramas C4 (Context, Container, Component) como Mermaid
  * a partir de ParsedSpec e Epics.

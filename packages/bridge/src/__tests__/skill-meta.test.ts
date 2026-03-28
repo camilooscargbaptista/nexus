@@ -1,5 +1,5 @@
 /**
- * @nexus/bridge — SkillMeta Tests
+ * @camilooscargbaptista/nexus-bridge — SkillMeta Tests
  */
 
 import { describe, it, expect } from "@jest/globals";

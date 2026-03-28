@@ -1,5 +1,5 @@
 /**
- * @nexus/core — Batch Executor
+ * @camilooscargbaptista/nexus-core — Batch Executor
  *
  * Execução paralela de tasks independentes no DAG.
  * Agrupa tasks por nível topológico e executa cada nível em Promise.allSettled().

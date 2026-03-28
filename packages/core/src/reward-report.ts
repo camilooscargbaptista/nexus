@@ -1,5 +1,5 @@
 /**
- * @nexus/core — Reward Report Generator
+ * @camilooscargbaptista/nexus-core — Reward Report Generator
  *
  * Gera relatórios Markdown dos rewards acumulados.
  *

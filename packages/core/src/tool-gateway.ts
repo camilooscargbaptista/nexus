@@ -1,5 +1,5 @@
 /**
- * @nexus/core — ToolGateway
+ * @camilooscargbaptista/nexus-core — ToolGateway
  *
  * Port do tool_gateway.py para TypeScript.
  * Registro, validação e execução de tools com histórico.

@@ -166,8 +166,8 @@ export interface NexusMeshConfig {
  * with Claude providers and optional custom providers.
  *
  * Usage:
- *   import { ProviderMesh } from "@nexus/core";
- *   import { setupNexusMesh } from "@nexus/core/providers/claude-mesh-provider";
+ *   import { ProviderMesh } from "@camilooscargbaptista/nexus-core";
+ *   import { setupNexusMesh } from "@camilooscargbaptista/nexus-core/providers/claude-mesh-provider";
  *
  *   const { mesh, providers } = setupNexusMesh({ apiKey: "sk-..." });
  *   const result = await mesh.dispatch(request);

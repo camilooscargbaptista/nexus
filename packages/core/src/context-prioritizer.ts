@@ -1,5 +1,5 @@
 /**
- * @nexus/core — Context Prioritizer
+ * @camilooscargbaptista/nexus-core — Context Prioritizer
  *
  * Prioriza e seleciona chunks de contexto para caber
  * na context window de um modelo LLM.

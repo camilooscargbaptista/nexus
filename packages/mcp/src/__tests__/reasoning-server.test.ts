@@ -4,7 +4,7 @@
 
 import { createReasoningServer } from "../reasoning-server.js";
 import type { ReasoningBackend, SkillRouteResult } from "../reasoning-server.js";
-import type { ArchitectureSnapshot, GuidanceResult, Domain } from "@nexus/types";
+import type { ArchitectureSnapshot, GuidanceResult, Domain } from "@camilooscargbaptista/nexus-types";
 import { Client } from "@modelcontextprotocol/sdk/client/index.js";
 import { InMemoryTransport } from "@modelcontextprotocol/sdk/inMemory.js";
 

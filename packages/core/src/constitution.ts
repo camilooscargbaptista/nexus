@@ -1,5 +1,5 @@
 /**
- * @nexus/core — Constitution Engine
+ * @camilooscargbaptista/nexus-core — Constitution Engine
  *
  * Define regras de qualidade (constitutions) contra as quais
  * o ReflectionLoop avalia recomendações antes de emitir.

@@ -1,5 +1,5 @@
 /**
- * @nexus/bridge — AutoRegistry
+ * @camilooscargbaptista/nexus-bridge — AutoRegistry
  *
  * Convention-based skill discovery e registro automático.
  * Escaneia diretórios por *.skill.ts, carrega módulos e valida com SkillMetaSchema.

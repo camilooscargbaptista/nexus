@@ -1,5 +1,5 @@
 /**
- * @nexus/core — TTLCache Tests
+ * @camilooscargbaptista/nexus-core — TTLCache Tests
  */
 
 import { describe, it, expect, beforeEach, afterEach } from "@jest/globals";

@@ -1,5 +1,5 @@
 /**
- * @nexus/bridge — MCP Tool Bridge
+ * @camilooscargbaptista/nexus-bridge — MCP Tool Bridge
  *
  * Adapta MCP tools para o formato SkillDescriptor do Nexus registry.
  * Permite que tools de MCP servers externos sejam usados

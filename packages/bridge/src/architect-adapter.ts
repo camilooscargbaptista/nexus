@@ -19,8 +19,8 @@ import type {
   NexusLayer,
   TemporalData,
   ForecastData,
-} from "@nexus/types";
-import type { NexusEventBus } from "@nexus/events";
+} from "@camilooscargbaptista/nexus-types";
+import type { NexusEventBus } from "@camilooscargbaptista/nexus-events";
 
 /**
  * Optional v4 temporal/forecast data from Architect analyzers.

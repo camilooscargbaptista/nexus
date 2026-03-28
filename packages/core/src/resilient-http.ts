@@ -1,5 +1,5 @@
 /**
- * @nexus/core — ResilientHttpClient
+ * @camilooscargbaptista/nexus-core — ResilientHttpClient
  *
  * HTTP client com retry, circuit breaker e timeout.
  * Zero dependências externas — usa native fetch.

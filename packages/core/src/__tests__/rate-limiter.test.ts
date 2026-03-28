@@ -1,5 +1,5 @@
 /**
- * @nexus/core — RateLimiter Tests
+ * @camilooscargbaptista/nexus-core — RateLimiter Tests
  */
 
 import { describe, it, expect, beforeEach } from "@jest/globals";

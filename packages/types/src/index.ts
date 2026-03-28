@@ -1,5 +1,5 @@
 /**
- * @nexus/types — Unified type system for the Nexus platform
+ * @camilooscargbaptista/nexus-types — Unified type system for the Nexus platform
  *
  * These types form the contract between all Nexus layers:
  *   Architect (Perception) → CTO Toolkit (Reasoning) → Sentinel (Validation) → Autonomy

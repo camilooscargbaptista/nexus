@@ -1,5 +1,5 @@
 /**
- * @nexus/bridge — Spec Generator Tests (Sprint 12)
+ * @camilooscargbaptista/nexus-bridge — Spec Generator Tests (Sprint 12)
  */
 
 import { describe, it, expect } from "@jest/globals";

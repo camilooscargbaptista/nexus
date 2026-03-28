@@ -1,5 +1,5 @@
 /**
- * @nexus/core — Stress Detector
+ * @camilooscargbaptista/nexus-core — Stress Detector
  *
  * Analisa patterns de estresse no codebase: code smells,
  * anti-patterns, developer frustration indicators.

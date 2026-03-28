@@ -1,5 +1,5 @@
 /**
- * @nexus/bridge — Spec Parser
+ * @camilooscargbaptista/nexus-bridge — Spec Parser
  *
  * Parseia input de alto nível (descrição de feature)
  * e extrai estrutura semântica: actors, features, data model hints,

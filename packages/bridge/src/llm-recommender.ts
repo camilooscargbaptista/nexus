@@ -1,5 +1,5 @@
 /**
- * @nexus/bridge — LLM Recommender
+ * @camilooscargbaptista/nexus-bridge — LLM Recommender
  *
  * Recomendação inteligente de skills: BM25 primeiro, fallback para LLM
  * quando o score de confiança é insuficiente.

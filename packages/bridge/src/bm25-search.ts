@@ -1,5 +1,5 @@
 /**
- * @nexus/bridge — BM25 Search Engine
+ * @camilooscargbaptista/nexus-bridge — BM25 Search Engine
  *
  * Implementação zero-dependency do algoritmo BM25 (Best Matching 25)
  * para busca textual semântica de skills no Nexus.

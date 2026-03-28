@@ -16,7 +16,7 @@
 import type {
   ArchitectureSnapshot,
   GuidanceFinding,
-} from "@nexus/types";
+} from "@camilooscargbaptista/nexus-types";
 
 // ═══════════════════════════════════════════════════════════════
 // TYPES

@@ -1,5 +1,5 @@
 {
-  "name": "@nexus/events",
+  "name": "@camilooscargbaptista/nexus-events",
   "version": "0.1.0",
   "description": "Event bus for cross-layer communication in the Nexus platform",
   "main": "dist/index.js",
@@ -16,7 +16,7 @@
     "clean": "rm -rf dist"
   },
   "dependencies": {
-    "@nexus/types": "*"
+    "@camilooscargbaptista/nexus-types": "*"
   },
   "license": "MIT"
 }

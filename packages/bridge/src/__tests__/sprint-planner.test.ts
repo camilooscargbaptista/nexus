@@ -1,5 +1,5 @@
 /**
- * @nexus/bridge — Sprint Planner Tests (Sprint 13)
+ * @camilooscargbaptista/nexus-bridge — Sprint Planner Tests (Sprint 13)
  */
 
 import { describe, it, expect } from "@jest/globals";

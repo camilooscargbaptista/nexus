@@ -10,7 +10,7 @@ import type {
   ArchitectTemporalReport,
   ArchitectForecastReport,
 } from '../architect-adapter.js';
-import type { ArchitectureSnapshot } from '@nexus/types';
+import type { ArchitectureSnapshot } from '@camilooscargbaptista/nexus-types';
 
 // ═══════════════════════════════════════════════════════════════
 // MOCK EVENT BUS

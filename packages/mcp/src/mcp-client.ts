@@ -1,5 +1,5 @@
 /**
- * @nexus/mcp — MCP Client
+ * @camilooscargbaptista/nexus-mcp — MCP Client
  *
  * Client que conecta a MCP servers externos via JSON-RPC 2.0.
  * Permite listar tools e executar calls em qualquer MCP server.

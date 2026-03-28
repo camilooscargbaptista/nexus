@@ -1,5 +1,5 @@
 /**
- * @nexus/events — Middleware Tests
+ * @camilooscargbaptista/nexus-events — Middleware Tests
  */
 
 import { describe, it, expect, jest, beforeEach } from "@jest/globals";

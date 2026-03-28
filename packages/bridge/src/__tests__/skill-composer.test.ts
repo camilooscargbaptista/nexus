@@ -3,7 +3,7 @@
  */
 import { SkillComposer, BUILT_IN_PIPELINES } from '../skill-composer';
 import type { SkillExecutor, CompositionPipeline } from '../skill-composer';
-import type { ArchitectureSnapshot, GuidanceResult, GuidanceFinding, Recommendation, SkillCategory, EffortEstimate, ConfidenceLevel } from '@nexus/types';
+import type { ArchitectureSnapshot, GuidanceResult, GuidanceFinding, Recommendation, SkillCategory, EffortEstimate, ConfidenceLevel } from '@camilooscargbaptista/nexus-types';
 
 // ─── Test Helpers ───────────────────────────────────────────
 

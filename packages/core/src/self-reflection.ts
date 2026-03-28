@@ -1,5 +1,5 @@
 /**
- * @nexus/core — Self-Reflection Engine
+ * @camilooscargbaptista/nexus-core — Self-Reflection Engine
  *
  * Loop de auto-reflexão: gera → avalia → regenera.
  * Training-Free RL sem GPU, sem fine-tuning.

@@ -1,5 +1,5 @@
 /**
- * @nexus/core — FallbackChain
+ * @camilooscargbaptista/nexus-core — FallbackChain
  *
  * Port do fallback.py para TypeScript.
  * Retry strategies com exponential/linear backoff e chain de fallback steps.

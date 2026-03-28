@@ -8,7 +8,7 @@
  */
 
 import { describe, it, expect, jest, beforeEach } from "@jest/globals";
-import { NexusEventBus } from "@nexus/events";
+import { NexusEventBus } from "@camilooscargbaptista/nexus-events";
 import { ArchitectAdapter } from "../architect-adapter.js";
 import { SentinelAdapter } from "../sentinel-adapter.js";
 import { ToolkitRouter } from "../toolkit-router.js";

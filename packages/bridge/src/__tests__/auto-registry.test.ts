@@ -1,5 +1,5 @@
 /**
- * @nexus/bridge — AutoRegistry Tests
+ * @camilooscargbaptista/nexus-bridge — AutoRegistry Tests
  */
 
 import { describe, it, expect, jest } from "@jest/globals";

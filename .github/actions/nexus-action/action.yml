@@ -45,8 +45,8 @@ runs:
     - name: Install Nexus CLI
       shell: bash
       run: |
-        npm install -g @nexus/cli 2>/dev/null || {
-          echo "::notice::@nexus/cli not yet published, using local build"
+        npm install -g @camilooscargbaptista/nexus-cli 2>/dev/null || {
+          echo "::notice::@camilooscargbaptista/nexus-cli not yet published, using local build"
           if [ -f "${{ github.workspace }}/packages/cli/package.json" ]; then
             cd "${{ github.workspace }}" && npm install && npm run build --workspace=packages/cli 2>/dev/null || true
             npm link --workspace=packages/cli 2>/dev/null || true

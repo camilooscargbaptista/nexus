@@ -1,5 +1,5 @@
 /**
- * @nexus/core — RateLimiter
+ * @camilooscargbaptista/nexus-core — RateLimiter
  *
  * Sliding window rate limiter com mutex para thread-safety.
  * Protege APIs upstream (Anthropic, OpenAI) e o Cloud API.

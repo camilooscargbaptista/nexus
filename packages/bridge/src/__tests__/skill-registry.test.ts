@@ -4,7 +4,7 @@
 
 import { SkillRegistry, BUILT_IN_SKILLS } from "../skill-registry.js";
 import type { SkillDescriptor, SkillTrigger } from "../skill-registry.js";
-import type { ArchitectureSnapshot, Severity, Domain } from "@nexus/types";
+import type { ArchitectureSnapshot, Severity, Domain } from "@camilooscargbaptista/nexus-types";
 
 // ─── Helpers ──────────────────────────────────────────────────
 

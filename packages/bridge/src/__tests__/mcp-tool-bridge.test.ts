@@ -1,5 +1,5 @@
 /**
- * @nexus/bridge — MCP Tool Bridge Tests
+ * @camilooscargbaptista/nexus-bridge — MCP Tool Bridge Tests
  */
 
 import { describe, it, expect } from "@jest/globals";

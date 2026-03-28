@@ -1,5 +1,5 @@
 /**
- * @nexus/bridge — The integration layer connecting Architect, CTO Toolkit, and Sentinel
+ * @camilooscargbaptista/nexus-bridge — The integration layer connecting Architect, CTO Toolkit, and Sentinel
  *
  * @author Camilo Girardelli — Girardelli Tecnologia
  * @license MIT
@@ -207,5 +207,5 @@ export type {
   ArchitectureSnapshot,
   GuidanceResult,
   ValidationSnapshot,
-} from "@nexus/types";
+} from "@camilooscargbaptista/nexus-types";
 

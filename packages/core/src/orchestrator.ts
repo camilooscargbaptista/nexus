@@ -1,5 +1,5 @@
 /**
- * @nexus/core — AgentOrchestrator
+ * @camilooscargbaptista/nexus-core — AgentOrchestrator
  *
  * Port do orchestrator.py para TypeScript.
  * Orquestra múltiplos agents com dependency resolution via Kahn's algorithm.
@@ -8,8 +8,8 @@
  * @author Camilo Girardelli — Girardelli Tecnologia
  */
 
-import { NexusEventType, NexusLayer } from "@nexus/types";
-import type { NexusEventBus } from "@nexus/events";
+import { NexusEventType, NexusLayer } from "@camilooscargbaptista/nexus-types";
+import type { NexusEventBus } from "@camilooscargbaptista/nexus-events";
 
 // ═══════════════════════════════════════════════════════════════
 // TYPES

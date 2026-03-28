@@ -4,7 +4,7 @@
 
 import { createPerceptionServer } from "../perception-server.js";
 import type { PerceptionBackend, ForecastResult, AntiPatternResult } from "../perception-server.js";
-import type { ArchitectureSnapshot, ArchitectureScoreBreakdown, Domain } from "@nexus/types";
+import type { ArchitectureSnapshot, ArchitectureScoreBreakdown, Domain } from "@camilooscargbaptista/nexus-types";
 import { Client } from "@modelcontextprotocol/sdk/client/index.js";
 import { InMemoryTransport } from "@modelcontextprotocol/sdk/inMemory.js";
 

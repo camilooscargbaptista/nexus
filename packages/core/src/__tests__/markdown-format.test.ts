@@ -1,5 +1,5 @@
 /**
- * @nexus/core — Markdown Format Tests
+ * @camilooscargbaptista/nexus-core — Markdown Format Tests
  */
 
 import { describe, it, expect } from "@jest/globals";

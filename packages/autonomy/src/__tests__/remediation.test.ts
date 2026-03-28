@@ -11,7 +11,7 @@ import type {
   VerificationResult,
   RemediationPlan,
 } from '../remediation';
-import type { GuidanceFinding } from '@nexus/types';
+import type { GuidanceFinding } from '@camilooscargbaptista/nexus-types';
 
 // ─── Helpers ────────────────────────────────────────────────
 

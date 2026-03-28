@@ -1,5 +1,5 @@
 /**
- * @nexus/core — Feedback Collector
+ * @camilooscargbaptista/nexus-core — Feedback Collector
  *
  * Coleta feedback estruturado de múltiplas fontes:
  * - Usuário direto (accept/reject)

@@ -1,5 +1,5 @@
 /**
- * @nexus/autonomy — Self-healing, debt prevention, architecture evolution
+ * @camilooscargbaptista/nexus-autonomy — Self-healing, debt prevention, architecture evolution
  *
  * @author Camilo Girardelli — Girardelli Tecnologia
  * @license MIT

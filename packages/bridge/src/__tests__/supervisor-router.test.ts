@@ -1,5 +1,5 @@
 /**
- * @nexus/bridge — Supervisor Router Tests
+ * @camilooscargbaptista/nexus-bridge — Supervisor Router Tests
  */
 
 import { describe, it, expect, jest } from "@jest/globals";

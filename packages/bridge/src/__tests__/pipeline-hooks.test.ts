@@ -9,7 +9,7 @@ import {
   createScoreGateHook,
 } from "../pipeline-hooks.js";
 import type { HookContext, HookDecision } from "../pipeline-hooks.js";
-import type { ArchitectureSnapshot, GuidanceFinding, Severity } from "@nexus/types";
+import type { ArchitectureSnapshot, GuidanceFinding, Severity } from "@camilooscargbaptista/nexus-types";
 
 // ─── Helpers ──────────────────────────────────────────────────
 
