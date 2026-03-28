@@ -1,0 +1,33 @@
+# Nexus Architecture Quality Gate
+#
+# Runs Nexus architecture analysis on every PR.
+# Posts score + findings as PR comment and fails build on critical issues.
+#
+# Usage: Copy this file to your repo's .github/workflows/ directory.
+
+name: Nexus Architecture Check
+
+on:
+  pull_request:
+    branches: [main, develop, staging]
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  nexus-review:
+    name: Architecture Review
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Run Nexus
+        uses: girardelli/nexus-action@v1
+        # For local repos, use: uses: ./.github/actions/nexus-action
+        with:
+          threshold: 70
+          fail-on-critical: true
+          comment-on-pr: true

@@ -31,6 +31,14 @@ export type {
   CodebaseInspector,
 } from "./drift-detector.js";
 
+// Sprint 18 — Guardian CI
+export { DriftScheduler } from "./drift-scheduler.js";
+export type {
+  DriftSchedulerConfig,
+  DriftSnapshot,
+  DriftEvent,
+} from "./drift-scheduler.js";
+
 // Sprint 8 — ECC Integration Patterns
 export { PipelineHookManager, createTimingHook, createFindingThresholdHook, createScoreGateHook } from "./pipeline-hooks.js";
 export type {
