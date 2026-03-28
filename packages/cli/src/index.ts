@@ -149,32 +149,40 @@ function appendHistory(projectPath: string, result: NexusPipelineResult): void {
 
 // ── analyze ──────────────────────────────────────────────────
 
-async function cmdAnalyze(projectPath: string): Promise<void> {
+async function cmdAnalyze(projectPath: string, jsonMode = false): Promise<void> {
   const absPath = resolve(projectPath);
 
   if (!existsSync(absPath)) {
-    console.error(color(`  Error: Path not found: ${absPath}`, c.red));
+    if (jsonMode) {
+      console.log(JSON.stringify({ score: 0, findings: [], error: `Path not found: ${absPath}` }));
+    } else {
+      console.error(color(`  Error: Path not found: ${absPath}`, c.red));
+    }
     process.exit(1);
   }
 
-  console.log(color("  Target:", c.dim), color(absPath, c.white, c.bold));
-  console.log();
+  if (!jsonMode) {
+    console.log(color("  Target:", c.dim), color(absPath, c.white, c.bold));
+    console.log();
+  }
 
   const eventBus = new NexusEventBus();
 
-  // Wire up progress logging
-  eventBus.on("*" as any, (event) => {
-    const e = event as any;
-    if (e.type === "architecture.analyzed") {
-      console.log(color("  ⚡ Layer I: Perception", c.amber, c.bold), color("(Architect)", c.dim));
-    } else if (e.type === "skill.triggered") {
-      console.log(color(`     → Skill: ${e.payload?.skillName}`, c.cyan));
-    } else if (e.type === "guidance.generated") {
-      console.log(color("  🧠 Layer II: Reasoning", c.blue, c.bold), color("(CTO Toolkit)", c.dim));
-    } else if (e.type === "validation.completed") {
-      console.log(color("  🛡️  Layer III: Validation", c.green, c.bold), color("(Sentinel)", c.dim));
-    }
-  });
+  // Wire up progress logging (only in interactive mode)
+  if (!jsonMode) {
+    eventBus.on("*" as any, (event) => {
+      const e = event as any;
+      if (e.type === "architecture.analyzed") {
+        console.log(color("  ⚡ Layer I: Perception", c.amber, c.bold), color("(Architect)", c.dim));
+      } else if (e.type === "skill.triggered") {
+        console.log(color(`     → Skill: ${e.payload?.skillName}`, c.cyan));
+      } else if (e.type === "guidance.generated") {
+        console.log(color("  🧠 Layer II: Reasoning", c.blue, c.bold), color("(CTO Toolkit)", c.dim));
+      } else if (e.type === "validation.completed") {
+        console.log(color("  🛡️  Layer III: Validation", c.green, c.bold), color("(Sentinel)", c.dim));
+      }
+    });
+  }
 
   const pipeline = new NexusPipeline(
     {
@@ -195,16 +203,49 @@ async function cmdAnalyze(projectPath: string): Promise<void> {
     // Save to history
     appendHistory(absPath, result);
 
-    // Print results
-    printResults(result, elapsed, absPath);
+    if (jsonMode) {
+      // JSON output for CI/action consumption
+      const findings = [
+        ...(result.perception?.antiPatterns ?? []).map((ap: any) => ({
+          severity: ap.severity,
+          pattern: ap.pattern,
+          location: ap.location,
+          description: ap.description,
+        })),
+      ];
+      console.log(JSON.stringify({
+        score: result.healthScore ?? result.perception?.score?.overall ?? 0,
+        findings,
+        duration: elapsed,
+        trend: result.trend,
+        architectScore: result.perception?.score?.overall ?? 0,
+        modularity: result.perception?.score?.modularity ?? 0,
+        coupling: result.perception?.score?.coupling ?? 0,
+        cohesion: result.perception?.score?.cohesion ?? 0,
+        layering: result.perception?.score?.layering ?? 0,
+        skillsActivated: result.reasoning?.length ?? 0,
+      }));
+    } else {
+      // Rich formatted output
+      printResults(result, elapsed, absPath);
+    }
   } catch (err) {
     const elapsed = Date.now() - start;
+
+    if (jsonMode) {
+      console.log(JSON.stringify({
+        score: 0,
+        findings: [],
+        error: err instanceof Error ? err.message : String(err),
+        duration: elapsed,
+      }));
+      process.exit(1);
+    }
+
     console.log();
     console.error(color("  ✗ Pipeline failed", c.red, c.bold), color(`(${formatDuration(elapsed)})`, c.dim));
     console.error(color(`    ${err instanceof Error ? err.message : String(err)}`, c.red));
     console.log();
-
-    // Try partial output if only some layers failed
     console.log(color("  Tip:", c.yellow), "Make sure @girardelli/architect is installed:");
     console.log(color("    npm install @girardelli/architect", c.dim));
     console.log();
@@ -424,15 +465,17 @@ function printHelp(): void {
 
 async function main(): Promise<void> {
   const args = process.argv.slice(2);
-  const command = args[0] ?? "--help";
-  const targetPath = args[1] ?? ".";
+  const jsonMode = args.includes("--json");
+  const filteredArgs = args.filter((a) => a !== "--json");
+  const command = filteredArgs[0] ?? "--help";
+  const targetPath = filteredArgs[1] ?? ".";
 
   if (command === "--version" || command === "-v") {
     console.log(`nexus v${VERSION}`);
     return;
   }
 
-  printBanner();
+  if (!jsonMode) printBanner();
 
   if (command === "--help" || command === "-h") {
     printHelp();
@@ -441,7 +484,7 @@ async function main(): Promise<void> {
 
   switch (command) {
     case "analyze":
-      await cmdAnalyze(targetPath);
+      await cmdAnalyze(targetPath, jsonMode);
       break;
     case "score":
       await cmdScore(targetPath);
