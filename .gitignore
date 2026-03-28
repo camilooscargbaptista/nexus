@@ -8,8 +8,7 @@ dist/
 # Nexus local data
 .nexus/
 
-# Generated docs
-docs/
+
 
 # Environment files
 .env

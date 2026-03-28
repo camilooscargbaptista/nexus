@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+# Nexus Session Hook — Context Injection
+# Detects platform, runs nexus status, and injects architectural health context.
+
+set -euo pipefail
+
+# Detect platform
+if [ -n "${CURSOR_PLUGIN_ROOT:-}" ]; then
+  PLUGIN_ROOT="$CURSOR_PLUGIN_ROOT"
+  PLATFORM="cursor"
+elif [ -n "${CLAUDE_PLUGIN_ROOT:-}" ]; then
+  PLUGIN_ROOT="$CLAUDE_PLUGIN_ROOT"
+  PLATFORM="claude"
+else
+  PLUGIN_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+  PLATFORM="unknown"
+fi
+
+# Try to get live architectural health from CLI
+CONTEXT=""
+if command -v nexus >/dev/null 2>&1; then
+  CONTEXT=$(nexus status --json 2>/dev/null || true)
+fi
+
+# If CLI not available or failed, inject intro skill as fallback
+if [ -z "$CONTEXT" ]; then
+  SKILL_FILE="$PLUGIN_ROOT/skills/using-nexus/SKILL.md"
+  if [ -f "$SKILL_FILE" ]; then
+    CONTEXT=$(cat "$SKILL_FILE")
+  else
+    CONTEXT="Nexus is an autonomous engineering intelligence platform. Use 'nexus analyze .' to analyze your codebase."
+  fi
+fi
+
+# Escape for JSON
+ESCAPED=$(printf '%s' "$CONTEXT" | python3 -c "import sys,json; print(json.dumps(sys.stdin.read()))" 2>/dev/null || printf '"%s"' "$CONTEXT")
+
+# Output JSON for hook system
+printf '{"hookSpecificOutput":{"additionalContext":%s,"metadata":{"platform":"%s","version":"0.2.0"}}}' "$ESCAPED" "$PLATFORM"
