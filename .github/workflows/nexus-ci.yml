@@ -25,8 +25,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Run Nexus
-        uses: girardelli/nexus-action@v1
-        # For local repos, use: uses: ./.github/actions/nexus-action
+        uses: ./.github/actions/nexus-action
         with:
           threshold: 70
           fail-on-critical: true
