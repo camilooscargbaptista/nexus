@@ -1,5 +1,5 @@
 /**
- * @nexus/bridge — Critic Adapter
+ * @camilooscargbaptista/nexus-bridge — Critic Adapter
  *
  * Adapter que converte o SentinelAdapter em um "critic" automático
  * para o ReflectionLoop. Avalia recomendações do pipeline usando
@@ -8,12 +8,12 @@
  * @author Camilo Girardelli — Girardelli Tecnologia
  */
 
-import { ConstitutionEngine } from "@nexus/core";
+import { ConstitutionEngine } from "@camilooscargbaptista/nexus-core";
 import type {
   ConstitutionRule,
   ConstitutionEvaluation,
   EvaluationContext,
-} from "@nexus/core";
+} from "@camilooscargbaptista/nexus-core";
 
 // ═══════════════════════════════════════════════════════════════
 // TYPES

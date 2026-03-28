@@ -1,5 +1,5 @@
 /**
- * @nexus/core — Batch Executor Tests
+ * @camilooscargbaptista/nexus-core — Batch Executor Tests
  */
 
 import { describe, it, expect, jest } from "@jest/globals";

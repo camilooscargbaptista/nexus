@@ -1,5 +1,5 @@
 /**
- * @nexus/core — Query Planner
+ * @camilooscargbaptista/nexus-core — Query Planner
  *
  * Decompõe objetivos complexos em steps executáveis via DAG.
  * Usa pattern matching + templates para decomposição,

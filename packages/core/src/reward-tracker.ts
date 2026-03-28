@@ -1,5 +1,5 @@
 /**
- * @nexus/core — Reward Tracker
+ * @camilooscargbaptista/nexus-core — Reward Tracker
  *
  * Rastreia recompensas (rewards) de ações do Nexus.
  * Feedback positivo/negativo para calibrar futuras recomendações.

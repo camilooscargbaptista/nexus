@@ -1,5 +1,5 @@
 /**
- * @nexus/bridge — Critic Adapter Tests
+ * @camilooscargbaptista/nexus-bridge — Critic Adapter Tests
  */
 
 import { describe, it, expect } from "@jest/globals";

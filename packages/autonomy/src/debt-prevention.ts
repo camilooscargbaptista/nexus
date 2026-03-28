@@ -15,7 +15,7 @@
  * @license MIT
  */
 
-import type { GuidanceFinding } from "@nexus/types";
+import type { GuidanceFinding } from "@camilooscargbaptista/nexus-types";
 
 // ═══════════════════════════════════════════════════════════════
 // TYPES

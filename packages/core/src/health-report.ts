@@ -1,5 +1,5 @@
 /**
- * @nexus/core — Health Report Generator
+ * @camilooscargbaptista/nexus-core — Health Report Generator
  *
  * Gera relatórios Markdown de saúde a partir dos snapshots
  * do HealthSupervisor e StressDetector.

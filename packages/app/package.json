@@ -1,5 +1,5 @@
 {
-  "name": "@nexus/github-app",
+  "name": "@camilooscargbaptista/nexus-github-app",
   "version": "1.0.0",
   "description": "Nexus GitHub App — automated architecture review on PRs",
   "type": "module",
@@ -11,10 +11,10 @@
     "test": "jest"
   },
   "dependencies": {
-    "@nexus/types": "*",
-    "@nexus/bridge": "*",
-    "@nexus/core": "*",
-    "@nexus/autonomy": "*",
+    "@camilooscargbaptista/nexus-types": "*",
+    "@camilooscargbaptista/nexus-bridge": "*",
+    "@camilooscargbaptista/nexus-core": "*",
+    "@camilooscargbaptista/nexus-autonomy": "*",
     "probot": "^13.0.0"
   }
 }

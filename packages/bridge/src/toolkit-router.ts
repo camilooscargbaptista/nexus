@@ -21,8 +21,8 @@ import type {
   ConfidenceLevel,
   NexusEventType,
   NexusLayer,
-} from "@nexus/types";
-import type { NexusEventBus } from "@nexus/events";
+} from "@camilooscargbaptista/nexus-types";
+import type { NexusEventBus } from "@camilooscargbaptista/nexus-events";
 
 // ═══════════════════════════════════════════════════════════════
 // SKILL ROUTING TABLE

@@ -1,5 +1,5 @@
 /**
- * @nexus/bridge — Data Model Generator
+ * @camilooscargbaptista/nexus-bridge — Data Model Generator
  *
  * Gera schemas de banco de dados (Prisma/PostgreSQL) e
  * API specs (OpenAPI) a partir de ParsedSpec.

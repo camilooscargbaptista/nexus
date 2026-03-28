@@ -7,10 +7,10 @@
     "rootDir": "./src",
     "types": ["node"],
     "paths": {
-      "@nexus/types": ["../types/src"],
-      "@nexus/events": ["../events/src"],
-      "@nexus/bridge": ["../bridge/src"],
-      "@nexus/core": ["../core/src"]
+      "@camilooscargbaptista/nexus-types": ["../types/src"],
+      "@camilooscargbaptista/nexus-events": ["../events/src"],
+      "@camilooscargbaptista/nexus-bridge": ["../bridge/src"],
+      "@camilooscargbaptista/nexus-core": ["../core/src"]
     }
   },
   "include": ["src/**/*.ts"],

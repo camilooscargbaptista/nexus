@@ -1,5 +1,5 @@
 /**
- * @nexus/core — Integration tests for Sprint 1
+ * @camilooscargbaptista/nexus-core — Integration tests for Sprint 1
  *
  * Tests covering:
  * - LLM Abstraction Layer (MockProvider)
@@ -12,8 +12,8 @@
  */
 
 import { describe, it, expect, beforeEach } from "@jest/globals";
-import { NexusEventBus } from "@nexus/events";
-import { NexusEventType } from "@nexus/types";
+import { NexusEventBus } from "@camilooscargbaptista/nexus-events";
+import { NexusEventType } from "@camilooscargbaptista/nexus-types";
 
 import { MockProvider } from "../providers/mock-provider.js";
 import {

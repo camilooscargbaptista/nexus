@@ -1,5 +1,5 @@
 {
-  "name": "@nexus/autonomy",
+  "name": "@camilooscargbaptista/nexus-autonomy",
   "version": "1.0.0",
   "description": "Nexus Autonomy Engine — self-healing, debt prevention, architecture evolution",
   "type": "module",
@@ -16,9 +16,9 @@
     "test": "jest"
   },
   "dependencies": {
-    "@nexus/types": "*",
-    "@nexus/events": "*",
-    "@nexus/core": "*",
-    "@nexus/bridge": "*"
+    "@camilooscargbaptista/nexus-types": "*",
+    "@camilooscargbaptista/nexus-events": "*",
+    "@camilooscargbaptista/nexus-core": "*",
+    "@camilooscargbaptista/nexus-bridge": "*"
   }
 }

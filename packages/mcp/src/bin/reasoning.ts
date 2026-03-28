@@ -13,13 +13,13 @@ import { createReasoningServer } from "../reasoning-server.js";
 import type { ReasoningBackend } from "../reasoning-server.js";
 
 async function loadDefaultBackend(): Promise<ReasoningBackend> {
-  // The reasoning backend wraps ToolkitRouter from @nexus/bridge
+  // The reasoning backend wraps ToolkitRouter from @camilooscargbaptista/nexus-bridge
   // For standalone use, it provides a simplified routing mechanism
   return {
     async routeSkills(snapshot) {
       try {
-        const bridge = await import("@nexus/bridge");
-        const { NexusEventBus } = await import("@nexus/events");
+        const bridge = await import("@camilooscargbaptista/nexus-bridge");
+        const { NexusEventBus } = await import("@camilooscargbaptista/nexus-events");
 
         const eventBus = new NexusEventBus();
         const router = new bridge.ToolkitRouter(eventBus);
@@ -34,14 +34,14 @@ async function loadDefaultBackend(): Promise<ReasoningBackend> {
         }));
       } catch {
         throw new Error(
-          "Could not load @nexus/bridge. Ensure the nexus monorepo is built."
+          "Could not load @camilooscargbaptista/nexus-bridge. Ensure the nexus monorepo is built."
         );
       }
     },
     async executeGuidance(skillName, snapshot) {
       try {
-        const bridge = await import("@nexus/bridge");
-        const { NexusEventBus } = await import("@nexus/events");
+        const bridge = await import("@camilooscargbaptista/nexus-bridge");
+        const { NexusEventBus } = await import("@camilooscargbaptista/nexus-events");
 
         const eventBus = new NexusEventBus();
         const router = new bridge.ToolkitRouter(eventBus);
@@ -60,7 +60,7 @@ async function loadDefaultBackend(): Promise<ReasoningBackend> {
           throw error;
         }
         throw new Error(
-          "Could not load @nexus/bridge. Ensure the nexus monorepo is built."
+          "Could not load @camilooscargbaptista/nexus-bridge. Ensure the nexus monorepo is built."
         );
       }
     },

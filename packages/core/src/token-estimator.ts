@@ -1,5 +1,5 @@
 /**
- * @nexus/core — Token Estimator
+ * @camilooscargbaptista/nexus-core — Token Estimator
  *
  * Estimador de tokens para modelos LLM.
  * Usa heurísticas baseadas em cl100k_base (GPT-4/Claude).

@@ -21,8 +21,8 @@
  * @license MIT
  */
 
-import type { ArchitectureSnapshot, Severity, Domain } from "@nexus/types";
-import type { ModelTier } from "@nexus/core";
+import type { ArchitectureSnapshot, Severity, Domain } from "@camilooscargbaptista/nexus-types";
+import type { ModelTier } from "@camilooscargbaptista/nexus-core";
 
 // ═══════════════════════════════════════════════════════════════
 // TYPES

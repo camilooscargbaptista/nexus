@@ -1,5 +1,5 @@
 /**
- * @nexus/bridge — Supervisor Router
+ * @camilooscargbaptista/nexus-bridge — Supervisor Router
  *
  * Orquestrador inteligente que substitui ToolkitRouter hardcoded.
  * Combina IntentClassifier + BM25 + RoutingStrategy para decidir

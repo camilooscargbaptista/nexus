@@ -9,7 +9,7 @@
  */
 
 import { describe, it, expect, beforeEach } from "@jest/globals";
-import { NexusEventBus } from "@nexus/events";
+import { NexusEventBus } from "@camilooscargbaptista/nexus-events";
 import { ArchitectAdapter, type ArchitectAnalysisReport } from "../architect-adapter.js";
 import { SentinelAdapter, type SentinelValidationResult } from "../sentinel-adapter.js";
 import { ToolkitRouter } from "../toolkit-router.js";
@@ -19,7 +19,7 @@ import type {
   GuidanceResult,
   ValidationSnapshot,
   NexusEventType,
-} from "@nexus/types";
+} from "@camilooscargbaptista/nexus-types";
 
 // ─── Mock Data ───
 

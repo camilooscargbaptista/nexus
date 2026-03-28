@@ -1,5 +1,5 @@
 /**
- * @nexus/core — LLM Abstraction Layer
+ * @camilooscargbaptista/nexus-core — LLM Abstraction Layer
  *
  * Interface genérica que abstrai Claude, GPT, Gemini, Ollama, etc.
  * Qualquer LLM que implementar LLMProvider pode ser plugado no Nexus.

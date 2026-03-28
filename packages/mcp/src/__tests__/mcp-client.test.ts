@@ -1,5 +1,5 @@
 /**
- * @nexus/mcp — MCP Client + Discovery Tests
+ * @camilooscargbaptista/nexus-mcp — MCP Client + Discovery Tests
  */
 
 import { describe, it, expect, beforeEach, jest } from "@jest/globals";

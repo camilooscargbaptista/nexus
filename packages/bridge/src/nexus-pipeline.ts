@@ -22,9 +22,9 @@ import type {
   NexusLayer,
   Severity,
   ConfidenceLevel,
-} from "@nexus/types";
-import { DEFAULT_CONFIG } from "@nexus/types";
-import { NexusEventBus } from "@nexus/events";
+} from "@camilooscargbaptista/nexus-types";
+import { DEFAULT_CONFIG } from "@camilooscargbaptista/nexus-types";
+import { NexusEventBus } from "@camilooscargbaptista/nexus-events";
 import { ArchitectAdapter } from "./architect-adapter.js";
 import { SentinelAdapter } from "./sentinel-adapter.js";
 import { ToolkitRouter } from "./toolkit-router.js";

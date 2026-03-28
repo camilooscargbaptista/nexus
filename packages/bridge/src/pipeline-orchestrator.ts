@@ -1,5 +1,5 @@
 /**
- * @nexus/bridge — Pipeline Orchestrator
+ * @camilooscargbaptista/nexus-bridge — Pipeline Orchestrator
  *
  * Orquestrador autônomo que conecta todos os módulos do Nexus
  * num fluxo end-to-end:

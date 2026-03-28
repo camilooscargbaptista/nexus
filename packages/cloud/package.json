@@ -1,5 +1,5 @@
 {
-  "name": "@nexus/cloud",
+  "name": "@camilooscargbaptista/nexus-cloud",
   "version": "1.0.0",
   "description": "Nexus Cloud API \u2014 REST backend for dashboard, auth, team management",
   "type": "module",

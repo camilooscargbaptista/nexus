@@ -1,5 +1,5 @@
 /**
- * @nexus/core — Health Supervisor + Stress Detector + Health Report Tests
+ * @camilooscargbaptista/nexus-core — Health Supervisor + Stress Detector + Health Report Tests
  */
 
 import { describe, it, expect } from "@jest/globals";

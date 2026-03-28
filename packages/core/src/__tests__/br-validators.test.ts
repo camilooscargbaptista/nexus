@@ -1,5 +1,5 @@
 /**
- * @nexus/core — BR Validators Tests
+ * @camilooscargbaptista/nexus-core — BR Validators Tests
  */
 
 import { describe, it, expect } from "@jest/globals";

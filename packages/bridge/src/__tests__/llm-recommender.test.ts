@@ -1,5 +1,5 @@
 /**
- * @nexus/bridge — LLM Recommender Tests
+ * @camilooscargbaptista/nexus-bridge — LLM Recommender Tests
  */
 
 import { describe, it, expect, jest } from "@jest/globals";

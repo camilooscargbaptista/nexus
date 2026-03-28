@@ -1,5 +1,5 @@
 /**
- * @nexus/mcp — MCP server factories for the Nexus platform
+ * @camilooscargbaptista/nexus-mcp — MCP server factories for the Nexus platform
  *
  * Three servers, one for each Nexus layer:
  *   - Perception (Architect): analyze, score, forecast, antiPatterns

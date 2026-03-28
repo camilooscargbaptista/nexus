@@ -1,0 +1,151 @@
+name: 'Nexus Architecture Check'
+description: 'Run Nexus architecture analysis as a CI quality gate. Posts findings as PR comments and fails builds on critical issues.'
+author: 'Girardelli Tecnologia'
+
+branding:
+  icon: 'shield'
+  color: 'purple'
+
+inputs:
+  threshold:
+    description: 'Minimum architecture score to pass (0-100)'
+    required: false
+    default: '70'
+  fail-on-critical:
+    description: 'Fail the build if critical findings are detected'
+    required: false
+    default: 'true'
+  comment-on-pr:
+    description: 'Post analysis summary as PR comment'
+    required: false
+    default: 'true'
+  working-directory:
+    description: 'Directory to analyze (default: repository root)'
+    required: false
+    default: '.'
+
+outputs:
+  score:
+    description: 'Architecture score (0-100)'
+  findings-count:
+    description: 'Total number of findings'
+  critical-count:
+    description: 'Number of critical findings'
+  passed:
+    description: 'Whether the quality gate passed (true/false)'
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+
+    - name: Install Nexus CLI
+      shell: bash
+      run: |
+        npm install -g @camilooscargbaptista/nexus-cli 2>/dev/null || {
+          echo "::notice::@camilooscargbaptista/nexus-cli not yet published, using local build"
+          if [ -f "${{ github.workspace }}/packages/cli/package.json" ]; then
+            cd "${{ github.workspace }}" && npm install && npm run build --workspace=packages/cli 2>/dev/null || true
+            npm link --workspace=packages/cli 2>/dev/null || true
+          fi
+        }
+
+    - name: Run Nexus Analysis
+      id: analyze
+      shell: bash
+      working-directory: ${{ inputs.working-directory }}
+      run: |
+        echo "::group::Nexus Architecture Analysis"
+
+        # Run analysis and capture output
+        RESULT=$(nexus analyze . --json 2>/dev/null || echo '{"score":0,"findings":[],"error":"CLI not available"}')
+
+        # Extract metrics
+        SCORE=$(echo "$RESULT" | python3 -c "import sys,json; d=json.load(sys.stdin); print(d.get('score',0))" 2>/dev/null || echo "0")
+        FINDINGS=$(echo "$RESULT" | python3 -c "import sys,json; d=json.load(sys.stdin); print(len(d.get('findings',[])))" 2>/dev/null || echo "0")
+        CRITICAL=$(echo "$RESULT" | python3 -c "import sys,json; d=json.load(sys.stdin); print(len([f for f in d.get('findings',[]) if f.get('severity')=='critical']))" 2>/dev/null || echo "0")
+
+        # Determine pass/fail
+        THRESHOLD=${{ inputs.threshold }}
+        FAIL_CRITICAL=${{ inputs.fail-on-critical }}
+        PASSED="true"
+
+        if [ "$SCORE" -lt "$THRESHOLD" ]; then
+          PASSED="false"
+          echo "::warning::Architecture score ($SCORE) is below threshold ($THRESHOLD)"
+        fi
+
+        if [ "$FAIL_CRITICAL" = "true" ] && [ "$CRITICAL" -gt "0" ]; then
+          PASSED="false"
+          echo "::error::$CRITICAL critical finding(s) detected"
+        fi
+
+        # Set outputs
+        echo "score=$SCORE" >> "$GITHUB_OUTPUT"
+        echo "findings-count=$FINDINGS" >> "$GITHUB_OUTPUT"
+        echo "critical-count=$CRITICAL" >> "$GITHUB_OUTPUT"
+        echo "passed=$PASSED" >> "$GITHUB_OUTPUT"
+
+        echo "Score: $SCORE/100 | Findings: $FINDINGS | Critical: $CRITICAL | Passed: $PASSED"
+        echo "::endgroup::"
+
+    - name: Comment on PR
+      if: inputs.comment-on-pr == 'true' && github.event_name == 'pull_request'
+      uses: actions/github-script@v7
+      with:
+        script: |
+          const score = '${{ steps.analyze.outputs.score }}';
+          const findings = '${{ steps.analyze.outputs.findings-count }}';
+          const critical = '${{ steps.analyze.outputs.critical-count }}';
+          const passed = '${{ steps.analyze.outputs.passed }}' === 'true';
+          const icon = passed ? '✅' : '❌';
+          const status = passed ? 'PASSED' : 'NEEDS ATTENTION';
+
+          const filled = Math.round(parseInt(score) / 5);
+          const empty = 20 - filled;
+          const bar = '█'.repeat(filled) + '░'.repeat(empty);
+
+          const body = [
+            `## ${icon} Nexus Architecture Review — ${status}`,
+            '',
+            `**Score: ${score}/100** | ${findings} finding(s) | ${critical} critical`,
+            '',
+            `\`${bar}\` ${score}%`,
+            '',
+            '---',
+            '*Powered by [Nexus](https://github.com/camilooscargbaptista/nexus) — Autonomous Engineering Intelligence*'
+          ].join('\n');
+
+          // Find existing Nexus comment to update
+          const { data: comments } = await github.rest.issues.listComments({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            issue_number: context.issue.number,
+          });
+          const existing = comments.find(c => c.body.includes('Nexus Architecture Review'));
+
+          if (existing) {
+            await github.rest.issues.updateComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              comment_id: existing.id,
+              body,
+            });
+          } else {
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body,
+            });
+          }
+
+    - name: Enforce Quality Gate
+      if: steps.analyze.outputs.passed == 'false'
+      shell: bash
+      run: |
+        echo "::error::Nexus quality gate failed — score: ${{ steps.analyze.outputs.score }}, critical: ${{ steps.analyze.outputs.critical-count }}"
+        exit 1

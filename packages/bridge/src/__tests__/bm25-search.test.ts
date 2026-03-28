@@ -1,5 +1,5 @@
 /**
- * @nexus/bridge — BM25 Search Tests
+ * @camilooscargbaptista/nexus-bridge — BM25 Search Tests
  */
 
 import { describe, it, expect } from "@jest/globals";

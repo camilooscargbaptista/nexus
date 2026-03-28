@@ -1,5 +1,5 @@
 /**
- * @nexus/core — TTLCache
+ * @camilooscargbaptista/nexus-core — TTLCache
  *
  * Cache in-memory com TTL (Time-To-Live) e LRU (Least Recently Used) eviction.
  * Zero dependências externas.

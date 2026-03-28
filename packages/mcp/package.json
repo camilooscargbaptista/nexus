@@ -1,5 +1,5 @@
 {
-  "name": "@nexus/mcp",
+  "name": "@camilooscargbaptista/nexus-mcp",
   "version": "0.1.0",
   "description": "MCP servers exposing Nexus perception, validation, and reasoning layers",
   "type": "module",
@@ -35,9 +35,9 @@
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.28.0",
-    "@nexus/types": "*",
-    "@nexus/events": "*",
-    "@nexus/bridge": "*"
+    "@camilooscargbaptista/nexus-types": "*",
+    "@camilooscargbaptista/nexus-events": "*",
+    "@camilooscargbaptista/nexus-bridge": "*"
   },
   "license": "MIT"
 }

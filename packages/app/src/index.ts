@@ -1,5 +1,5 @@
 /**
- * @nexus/github-app — GitHub App for automated architecture review
+ * @camilooscargbaptista/nexus-github-app — GitHub App for automated architecture review
  *
  * @author Camilo Girardelli — Girardelli Tecnologia
  * @license MIT

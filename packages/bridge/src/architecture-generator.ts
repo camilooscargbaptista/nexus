@@ -1,5 +1,5 @@
 /**
- * @nexus/bridge — Architecture Generator
+ * @camilooscargbaptista/nexus-bridge — Architecture Generator
  *
  * Orquestrador que combina C4Generator + DataModelGenerator
  * para produzir documentação arquitetural completa nível SmartCollect.

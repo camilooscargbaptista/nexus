@@ -12,7 +12,7 @@
 
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { z } from "zod";
-import type { ValidationSnapshot, Severity } from "@nexus/types";
+import type { ValidationSnapshot, Severity } from "@camilooscargbaptista/nexus-types";
 
 // ═══════════════════════════════════════════════════════════════
 // TYPES

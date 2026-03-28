@@ -1,5 +1,5 @@
 /**
- * @nexus/core — Reward Tracker + Feedback Collector + Reward Report Tests
+ * @camilooscargbaptista/nexus-core — Reward Tracker + Feedback Collector + Reward Report Tests
  */
 
 import { describe, it, expect } from "@jest/globals";

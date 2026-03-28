@@ -20,7 +20,7 @@ import type {
   ArchitectureScoreBreakdown,
   AntiPatternFinding,
   Domain,
-} from "@nexus/types";
+} from "@camilooscargbaptista/nexus-types";
 
 // ═══════════════════════════════════════════════════════════════
 // TYPES

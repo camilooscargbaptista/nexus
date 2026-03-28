@@ -1,5 +1,5 @@
 /**
- * @nexus/bridge — Routing Strategy
+ * @camilooscargbaptista/nexus-bridge — Routing Strategy
  *
  * Estratégia híbrida de roteamento: BM25 fast-match + IntentClassifier
  * para queries ambíguas. Determina qual(is) skill(s) devem ser ativadas.

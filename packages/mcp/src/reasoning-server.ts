@@ -15,7 +15,7 @@ import type {
   ArchitectureSnapshot,
   GuidanceResult,
   SkillCategory,
-} from "@nexus/types";
+} from "@camilooscargbaptista/nexus-types";
 
 // ═══════════════════════════════════════════════════════════════
 // TYPES

@@ -1,5 +1,5 @@
 /**
- * @nexus/mcp — MCP Discovery
+ * @camilooscargbaptista/nexus-mcp — MCP Discovery
  *
  * Descobre e gerencia MCP servers disponíveis via configuração.
  * Conecta automaticamente e registra tools descobertos.

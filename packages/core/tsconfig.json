@@ -7,8 +7,8 @@
     "rootDir": "./src",
     "types": ["node"],
     "paths": {
-      "@nexus/types": ["../types/src"],
-      "@nexus/events": ["../events/src"]
+      "@camilooscargbaptista/nexus-types": ["../types/src"],
+      "@camilooscargbaptista/nexus-events": ["../events/src"]
     }
   },
   "include": ["src/**/*.ts"],

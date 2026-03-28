@@ -1,13 +1,15 @@
 {
-  "name": "@nexus/events",
-  "version": "0.1.0",
+  "name": "@camilooscargbaptista/nexus-events",
+  "version": "0.2.0",
   "description": "Event bus for cross-layer communication in the Nexus platform",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "exports": {
     ".": {
+      "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
-      "types": "./dist/index.d.ts"
+      "require": "./dist/index.js",
+      "default": "./dist/index.js"
     }
   },
   "scripts": {
@@ -16,7 +18,7 @@
     "clean": "rm -rf dist"
   },
   "dependencies": {
-    "@nexus/types": "*"
+    "@camilooscargbaptista/nexus-types": "*"
   },
   "license": "MIT"
 }

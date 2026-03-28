@@ -1,5 +1,5 @@
 /**
- * @nexus/bridge — SkillMeta
+ * @camilooscargbaptista/nexus-bridge — SkillMeta
  *
  * Schema validation (Zod) para SkillDescriptor + fluent builder API.
  * Garante que skills registrados são válidos em runtime.
@@ -9,7 +9,7 @@
 
 import { z } from "zod";
 import type { SkillDescriptor, SkillTrigger, SkillDescriptorCategory } from "./skill-registry.js";
-import type { ModelTier } from "@nexus/core";
+import type { ModelTier } from "@camilooscargbaptista/nexus-core";
 
 // ═══════════════════════════════════════════════════════════════
 // ZOD SCHEMAS

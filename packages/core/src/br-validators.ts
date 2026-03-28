@@ -1,5 +1,5 @@
 /**
- * @nexus/core — BR Validators
+ * @camilooscargbaptista/nexus-core — BR Validators
  *
  * Validação de documentos brasileiros: CPF, CNPJ, CEP.
  * Algoritmos puros, zero dependências externas.
